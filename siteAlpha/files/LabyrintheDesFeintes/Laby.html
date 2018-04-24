@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Le labyrinthe des feintes !</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <style>
+        td {
+            padding: 8px;
+        }
+
+    </style>
+</head>
+
+<body onload="init()" onkeydown="Deplacement(event.keyCode)">
+    <div class="navbar">
+        <a href="http://classe2b.eyx.ch">Home</a>
+
+        <div class="dropdown">
+            <button class="dropbtn">Menu 
+      <i class="fa fa-caret-down"></i>
+    </button>
+            <div class="dropdown-content">
+                <a href="./Editeur.html">Editeur</a>
+                <a onclick="choix()">Ouvrir un laby</a>
+                <a id="btnTutoMakup" onclick="Tutoriel()">Activer Tutoriel</a>
+                <a id="btnTutoMakup" onclick="ReloadMap()">Recommencer niveau</a>
+            </div>
+        </div>
+    </div>
+    <div id="tutoMakup" style="float:right;margin-top: 5%;margin-right: 10%;visibility: hidden;width:30%;">
+        <table>
+            <tr>
+                <td>
+                    Joueur :
+                </td>
+                <td>
+                    <img style="width:38px;" draggable="false" src="./images/DeFace.png"></td>
+                <td>
+                    <label>Ca, c'est vous. Déplacez vous avec les flèches et vous verrez.</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Mur :
+                </td>
+                <td>
+                    <img style="width:38px;" draggable="false" src="./images/BlocMur.png"></td>
+                <td>
+                    <label>Qu'est-ce que serait un labyrinthe sans mur ?</label>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Sol :
+                </td>
+                <td>
+                    <img style="width:38px" draggable="false" src="./images/Sol.png"></td>
+                <td>
+                    <label>Mur traversable invisible</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Clé :
+                </td>
+                <td>
+                    <img style="width:38px" draggable="false" src="./images/Cle.png"></td>
+                <td>
+                    <label>La clé permet d'ouvir la porte de sortie. Une seule clé suffit, pas besoin de toutes les avoirs !</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Sortie :
+                </td>
+                <td>
+                    <img style="width:38px" draggable="false" src="./images/porte.png"></td>
+                <td>
+                    <labe>La sortie... Le bloc que tous les joueurs veulent atteindre. Malheureusement, il vous faudra une clé ! Astuce : Chaque porte à la même utilité, vous pouvez emprunter n'importe laquel.</labe>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Mur Invisible :
+                </td>
+                <td>
+                    <img style="width:38px" draggable="false" src="./images/Sol.png"></td>
+                <td>
+                    <label>Ces murs sont fourbes. On ne les voit pas, et pourtant, ils sont là. Bonjour les faux espoirs.</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Mur Traversable :
+                </td>
+                <td>
+                    <img style="width:38px" draggable="false" src="./images/BlocMur.png"></td>
+                <td>
+                    <label>Ces blocs ont l'aspect d'un mur ordinaire, mais vous pouvez quand même passer à travers. Très pratique pour cacher des passages.</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Caisse :
+                </td>
+                <td>
+                    <img style="width:38px" draggable="false" src="./images/Caisse.png"></td>
+                <td>
+                    <label>Ces caisses sont déplacables !  Vous pouvez les pousser ou les tirer. Astuce : Appuyez sur CTRL pour tirer la caisse.</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Surprise :
+                </td>
+                <td>
+                    <img style="width:38px" draggable="false" src="./images/BlocSurprise.png"></td>
+                <td>
+                    <label>Ce bloc a plusieurs fonctionnalitées. Il est imprévisible et peut vous aider comme vous tuer. Impossible à prévoir.</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Laser :
+                </td>
+                <td>
+                    <img style="width:38px" draggable="false" src="./images/LaserH.png"></td>
+                <td>
+                    <laser>Vous tuent lorsque vous arrivez sur la même case. Astuce : Bloquez les avec un autre bloc...</laser>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Téléportation :
+                </td>
+                <td>
+                    <img style="width:38px" draggable="false" src="./images/TP.png"></td>
+                <td>
+                    <label>Téléporte à un endroit fixe. Astuce : Elle permet de faire disparaitre des blocs...</label>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p style="margin:10px;margin-bottom: 5%;"><b>Entrez votre recherche :</b></p>
+                    <input  style="margin: 10px;margin-left: 5.5%; height: 30px; width: 180px;" type="text" id="tbxNameNiveau" placeholder="Entrez le nom du niveau" />
+                    <input  style="margin: 10px; height: 30px; width: 180px;" type="text" id="tbxNameCreator" placeholder="Entrez le nom du créateur" />
+                    <input style=" margin: 10px; height: 30px; width: 150px;" type="button" onclick="Filtre()" value="Rechercher" />
+                    <div id="checkbox">
+                        <input type="checkbox" name="difficulte" value="Base">Base</input>
+					    <input type="checkbox" name="difficulte" value="Facile">Facile</input>
+					    <input type="checkbox" name="difficulte" value="Moyen">Moyen</input>
+					    <input type="checkbox" name="difficulte" value="Difficile">Difficile</input>
+                    </div>
+                    <div id="test" style="width: 20%;display: inline-block;">
+					<label>Note :</label>
+					<select id="ordre">
+						<option value="ASC">Croissant</option>
+						<option value="DESC">Décroissant</option>
+					</select>
+                    </div>
+					<br>
+					<table id="tableauNiveaux">
+						<!--<tr class="trNiveaux">
+							<th id="thNiveaux1" class="thNiveaux">Nom du niveau :</th>
+							<th id="thNiveaux2" class="thNiveaux">Nom du créateur :</th>
+							<th id="thNiveaux3" class="thNiveaux">Difficulté :</th>
+							<th id="thNiveaux4" class="thNiveaux">Note :</th>
+							<th id="thNiveaux5" class="thNiveaux">Fait :</th>
+						</tr>-->
+					</table>
+                </div>
+
+            </div>
+
+                <table id="controlesTelephone">
+                    <tr>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            <img src="./images/haut.png" width="50px;" onclick="Deplacement(38)"/>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="./images/gauche.png" width="70px;" onclick="Deplacement(37)"/>
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            <img src="./images/droite.png" width="70px;" onclick="Deplacement(39)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            <img src="./images/bas.png" width="50px;" onclick="Deplacement(40)"/>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </table>                
+
+    <div id="labyrinthe"></div>
+    <div id="btnTelephone"><img id="btnCaisse" src="./images/btnCaisse.png" style="width: 70px;" onclick="setControl()"/></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="Laby.js"></script>
+</body>
+
+</html>

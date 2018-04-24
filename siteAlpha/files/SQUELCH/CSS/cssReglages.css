@@ -1,0 +1,125 @@
+.slider {
+    -webkit-appearance: none;
+    width: 25%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #03A9F4;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+div {
+    font-family: 'Righteous', cursive;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #FFFFFF;
+}
+
+h1 {
+    font-family: 'Righteous', cursive;
+    font-size: 5rem;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+h1:hover {
+    animation-name: pulse;
+    animation-duration: 0.5s;
+}
+
+.son {
+    font-family: 'Righteous', cursive;
+    font-size: 5rem;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.btnsMenu {
+    font-family: 'Righteous', cursive;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #FFFFFF;
+    width: 35%;
+    height: 5%;
+    border-radius: 10px;
+    border: 3px solid transparent;
+    background-color: transparent;
+    transition-duration: 0.4s;
+    margin-bottom: 1%;
+}
+
+.container {
+    margin-top: 500px;
+}
+
+.btnsMenu:hover {
+    font-size: 3rem;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url(../IMG/back.png);
+    text-align: center;
+	overflow: hidden;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+
+    50% {
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+#btn
+{
+	background-color: transparent;
+	border: none;
+	font-family: 'Righteous', cursive;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #FFFFFF;
+	margin-top: 150px;
+	transition-duration: 0.4s;
+}
+#btn:hover
+{
+	font-size: 2.5rem;
+}

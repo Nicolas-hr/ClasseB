@@ -1,0 +1,196 @@
+
+* 
+{
+    overflow: hidden;
+}
+h1 {
+    font-family: 'Righteous', cursive;
+    font-size: 5rem;
+    text-align: center;
+    margin-bottom: 5%;
+    margin-top: -0.5%;
+}
+
+.btnsMenu {
+    font-family: 'Righteous', cursive;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #FFFFFF;
+    width: 35%;
+    height: 5%;
+    border-radius: 10px;
+    border: 3px solid transparent;
+    background-color: transparent;
+    transition-duration: 0.4s;
+    margin-bottom: 1%;
+    }
+
+#mapContainer {
+    position: relative;
+    height: 800px;
+    width: 1200px;
+    margin: auto;
+    margin-top: -5%;
+}
+
+#map {
+    height: 800px;
+    z-index: 1;
+}
+
+#mission1C {
+    position: absolute;
+    bottom: 275px;
+    left: -10px;
+
+}
+
+.icon:hover {
+    transform: scale3d(1.5, 1.5, 1.5);
+    animation-name: pulseHover;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+#mission2C {
+    position: absolute;
+    bottom: 160px;
+    left: 200px;
+}
+
+#mission3C {
+    position: absolute;
+    bottom: 385px;
+    left: 312px;
+}
+
+#mission4C {
+    position: absolute;
+    top: 90px;
+    left: 275px;
+}
+
+#mission5C {
+    position: absolute;
+    top: 200px;
+    left: 700px;
+}
+
+#mission6C {
+    position: absolute;
+    top: 300px;
+    right: 25px;
+}
+
+#mission7C {
+    position: absolute;
+    bottom: 100px;
+    right: 125px;
+}
+
+#mission8C {
+    position: absolute;
+    bottom: 350px;
+    right: 400px;
+}
+
+#mission9C {
+    position: absolute;
+    bottom: 65px;
+    right: 290px;
+}
+
+.btnsMenu:hover {
+    font-size: 2rem;
+}
+
+.difficulte {
+    height: 60%;
+
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-image: url(../IMG/back.png);
+    text-align: center;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+
+    50% {
+        transform: scale3d(1.4, 1.4, 1.4);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes pulseHover {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+
+    10% {
+        transform: scale3d(1.2, 1.2, 1.2);
+    }
+
+    to {
+        transform: scale3d(1.25, 1.25, 1.25);
+    }
+}
+
+.container {
+    position: relative;
+    width: 50%;
+}
+
+.image {
+    opacity: 1;
+    display: block;
+    height: 50%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%)
+}
+
+.container:hover .image {
+    opacity: 0.5;
+}
+
+.container:hover .middle {
+    opacity: 1;
+}
+
+.text {
+    background-color: transparent;
+    color: white;
+    font-size: 3rem;
+    height: 25%;
+    padding: auto;
+}
+p
+{
+    margin: auto;
+}

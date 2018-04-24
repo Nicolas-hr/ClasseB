@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Le labyrinthe des feintes !</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+
+<body onkeypress="Clavier(event)" onload="Initialisation()">
+    <div id="container">
+        <div class="navbar">
+            <a href="http://classe2b.eyx.ch">Home</a>
+            <a href="./Laby.html">Laby</a>
+
+        </div>
+        <main id="labyrinthe" style="user-select: none">
+
+        </main>
+
+        <nav class="parametres">
+            <fieldset>
+                <legend><b>Ajouter une téléportation</b></legend>
+                <table>
+                    <tr>
+                        <td>
+                            Coordoné X :
+                        </td>
+                        <td>
+                            <input id="tbxTPX" type="number" min="5" max="60">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Coordoné Y :
+                        </td>
+                        <td>
+                            <input id="tbxTPY" type="number" min="5" max="60">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Vers coordoné X :  
+                        </td>
+                        <td>
+                            <input id="tbxTPVersX" type="number" min="5" max="60">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Vers coordoné Y : 
+                        </td>
+                        <td>
+                            <input id="tbxTPVersY" type="number" min="5" max="60">
+                        </td>
+                    </tr>
+
+                </table>
+                <button style="margin-top: 5%;width: 100%; height: 30px;" onclick="AjouteTP()">Ajouter</button>
+            </fieldset>
+            <fieldset id="vosNiveaux">
+                <legend><b>Vos niveaux :</b></legend>
+                <ul id="listeNiveau" style="list-style-type: none">
+
+                </ul>
+
+            </fieldset>
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p style="margin:10px;"><b>Entrez le nom du niveau et le niveau de difficulté :</b></p>
+                    <input  style="margin: 10px; height: 30px; width: 180px;" type="text" id="tbxNameNiveau" placeholder="Entrez le nom du niveau" />
+                    <select id="categorie" style="margin: 10px; height: 30px; width: 100px;">
+						<option value="Facile">
+							Facile
+						</option>
+						<option value="Moyen">
+							Moyen
+						</option>
+						<option value="Difficile">
+							Difficle
+						</option>
+					</select>
+                    <input style=" margin: 10px; height: 30px; width: 150px;" type="button" onclick="Insert()" value="Confirmer" />
+                </div>
+
+            </div>
+        </nav>
+
+        <nav id="posMouse" class="parametres">
+            <fieldset>
+                <legend><b>Position de la souris :</b></legend>
+                <label id="lblPosition"></label>
+            </fieldset>
+
+            <fieldset id="blockssss">
+                <legend><b>Types de bloques</b></legend>
+                <table>
+                    <tr>
+                        <td>
+                            Joueur :
+                        </td>
+                        <td>
+                            <img id="btnJoueur" onclick="Joueur()" style="width:30px;" draggable="false" src="./images/DeFace.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mur :
+                        </td>
+                        <td>
+                            <img id="btnMur" onclick="Mur()" style="width:30px;" draggable="false" src="./images/BlocMur.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Sol :
+                        </td>
+                        <td>
+                            <img id="btnSol" onclick="Sol()" style="width:30px" draggable="false" src="./images/Sol.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Clé :
+                        </td>
+                        <td>
+                            <img id="btnCle" onclick="Cle()" style="width:30px" draggable="false" src="./images/Cle.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Sortie :
+                        </td>
+                        <td>
+                            <img id="btnSortie" onclick="Sortie()" style="width:30px" draggable="false" src="./images/porte.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mur Invisible :
+                        </td>
+                        <td>
+                            <img id="btnMurInvisible" onclick="MurInvisible()" style="width:30px" draggable="false" src="./images/MurInvisible.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mur Traversable :
+                        </td>
+                        <td>
+                            <img id="btnMurTraversable" onclick="MurTraversable()" style="width:30px" draggable="false" src="./images/MurTraversable.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Caisse :
+                        </td>
+                        <td>
+                            <img id="btnCaisse" onclick="Caisse()" style="width:30px" draggable="false" src="./images/Caisse.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Surprise :
+                        </td>
+                        <td>
+                            <img id="btnSurprise" onclick="Surprise()" style="width:30px" draggable="false" src="./images/BlocSurprise.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Laser Horizontal :
+                        </td>
+                        <td>
+                            <img id="btnLaserH" onclick="LaserHorizontal()" style="width:30px" draggable="false" src="./images/LaserCentreH.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Laser Vertical :
+                        </td>
+                        <td>
+                            <img id="btnLaserV" onclick="LaserVertical()" style="width:30px" draggable="false" src="./images/LaserCentreV.png">
+                        </td>
+                    </tr>
+                </table>
+
+            </fieldset>
+
+            <fieldset>
+                <legend><b>Dimension du labyrinthe</b></legend><br>
+                <table>
+                    <tr>
+                        <td>
+                            Nombre de colonne :
+                        </td>
+                        <td>
+                            <input id="tbxTailleX" type="number" min="5" max="28">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Nombre de ligne :
+                        </td>
+                        <td>
+                            <input id="tbxTailleY" type="number" min="5" max="28">
+                        </td>
+                    </tr>
+                </table>
+                <button style="margin-top: 5%;width: 100%; height: 30px;" onclick="Dessine(tbxTailleX.value, tbxTailleY.value)">Lancer le laby</button>
+                <button style="margin-top: 5%;width: 100%; height: 30px;" onclick="Sauvegarder()">Sauvegarder le laby</button>
+            </fieldset>
+        </nav>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="./Editeur.js" type="text/javascript"></script>
+</body>

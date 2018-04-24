@@ -1,0 +1,228 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial;
+}
+body{
+    overflow: hidden;
+   }
+nav{
+    margin-top: 0%;
+    height: 850px;
+    padding: 10px;
+    float:right;
+    width: 15%;
+    margin-right: 5%;
+}
+
+main{
+    padding: 10px;
+    width: 50%;
+    float: left;
+    margin-left: 5%;
+}
+
+fieldset {
+    padding: 10px;
+    margin-top: 10%;
+    float: left;
+    width: 100%;
+}
+
+
+
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial;    
+}
+
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 45%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.vosNiveau:hover
+{
+    background-color: lightgray;
+}
+
+.vosNiveau
+{
+    margin: 5px;
+}
+
+
+
+
+/* Tableau niveau */
+
+#tableauNiveaux
+{
+	margin: auto;
+}
+
+.trNiveaux
+{
+	
+}
+
+.trNiveaux:hover
+{
+	background-color: lightgray;
+}
+
+.thNiveaux
+{
+	height: 50px;
+    width: 100%;
+    text-align: left;
+}
+
+#thNiveaux1
+{
+	width: 27%;
+}
+
+#thNiveaux2
+{
+	width: 27%;
+}
+
+#thNiveaux3
+{
+	width: 25%;
+}
+
+#thNiveaux4
+{
+	width: 15%;
+}
+
+#thNiveaux5 {
+    width: 6%;
+}
+
+#checkbox input {
+    
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 5px;
+    
+    
+}
+#checkbox {
+    margin-left: 3.5%;
+    width:55%;
+    display: inline-block;
+}
+
+#controlesTelephone
+{
+    position: absolute;
+    bottom: 0;
+    z-index: 5;
+    opacity: 0.5;
+}
+
+
+#btnTelephone{
+    position: absolute;
+    bottom: 0;
+    z-index: 5;
+    opacity: 0.5;
+    left: 80%;
+    margin-bottom: 20px;
+}
+
+
+
+

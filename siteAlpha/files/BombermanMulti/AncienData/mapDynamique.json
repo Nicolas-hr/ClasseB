@@ -1,0 +1,24 @@
+{
+    "dynamique": [
+        {
+            "img": {
+                "src": "./img/sprites/persoGauche.png",
+                "id": "joueur_WASD",
+                "style": {
+                    "left": "582px",
+                    "top": "50px"
+                }
+            }
+        },
+        {
+            "img": {
+                "src": "./img/sprites/persoGauche.png",
+                "id": "joueur_WASD",
+                "style": {
+                    "left": "582px",
+                    "top": "50px"
+                }
+            }
+        }
+    ]
+}

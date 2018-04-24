@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <title>jeu</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="js/build/three.js"></script>
+    <script src="js/build/Tween.js"></script>
+    <script src="CircleType-master/dist/circletype.min.js"></script>
+</head>
+
+<body>
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
+    <header>
+        <h1 id="h1Curve">Spectral Force</h1>
+        <h2 id="h2Curve">-Silent Sentinel-</h2>
+    </header>
+    <div id="scene1">
+
+    </div>
+    <h3>Appuyez sur Entrée pour débuter !</h3>
+    <h4>Julian Gutierrez - CFPT 2018 </h4>
+    <a id="next_page_link" href="loader.html"></a>
+
+
+
+    <script>
+        //Txt Titre
+        new CircleType(document.getElementById('h1Curve')).radius(900);
+        new CircleType(document.getElementById('h2Curve')).radius(900);
+
+        //Variables de la scène
+        var sceneWidth;
+        var sceneHeight;
+        var camera;
+        var scene;
+        var renderer;
+        var dom;
+        var planet;
+        var timerRotatePlanet = setInterval(RotatePlanet, 16);
+
+
+
+        init();
+
+
+        function init() {
+            createScene();
+            update();
+        }
+
+        function createScene() {
+
+
+
+            //Initialise la scene
+            sceneWidth = window.innerWidth;
+            sceneHeight = window.innerHeight;
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(60, sceneWidth / sceneHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({
+                alpha: true
+            });
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.setSize(sceneWidth, sceneHeight);
+            dom = document.getElementById('scene1');
+            dom.appendChild(renderer.domElement);
+
+
+
+            var geometry = new THREE.SphereBufferGeometry(4, 32, 32);
+            var material = new THREE.MeshPhongMaterial();
+            material.map = THREE.ImageUtils.loadTexture('img/earthmap1k.jpg');
+            material.bumpMap = THREE.ImageUtils.loadTexture('img/earthbump1k.jpg')
+            material.bumpScale = 5;
+            material.specularMap = THREE.ImageUtils.loadTexture('img/earthspec1k.jpg')
+            material.specular = new THREE.Color('grey')
+
+
+
+
+
+            planet = new THREE.Mesh(geometry, material);
+            planet.position.set(0, 2, 480);
+
+
+
+            scene.add(planet);
+
+
+
+
+
+            //Ajoute la lumière
+           
+
+            var light = new THREE.HemisphereLight(0xfffbbb, 0x090820, 0.5);
+            scene.add(light);
+            
+             var light = new THREE.HemisphereLight(0xfffbbb, 0x090820, 1.1);
+            light.position.set(1000,300,1);
+            scene.add(light);
+
+
+            //Position de la camera
+            camera.position.z = 500;
+            camera.position.y = 10;
+            camera.position.x = 0;
+            camera.rotation.x = -0.5;
+
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+
+        function RotatePlanet() {
+            planet.rotation.y += 0.002;
+        }
+
+
+        function EntreePressed() {
+
+            window.location = 'loader.html';
+
+        }
+
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            switch (evt.keyCode) {
+                case 13:
+                    EntreePressed();
+                    break;
+            }
+        };
+
+
+
+
+
+        function update() {
+            render();
+            requestAnimationFrame(update);
+
+        }
+
+
+
+        function render() {
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            //Qd on diminue la fenetre
+            sceneHeight = window.innerHeight;
+            sceneWidth = window.innerWidth;
+            renderer.setSize(sceneWidth, sceneHeight);
+            camera.aspect = sceneWidth / sceneHeight;
+            camera.updateProjectionMatrix();
+        }
+
+    </script>
+
+</body>
+
+</html>

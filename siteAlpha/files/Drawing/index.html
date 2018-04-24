@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Drawing</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            canvas {
+                position: relative;
+                border: 3px solid black;
+                cursor: crosshair;
+            }
+            #parametre{
+                float: right;
+                position: relative;
+                border: 3px solid black;
+                width: 250px;
+                height: 900px;
+            }
+        </style>
+    </head>
+    <body onkeypress="couleurRandom(event)">
+        <canvas id="canvas" width="1400" height="900"></canvas>
+        <div id="parametre">
+            <span>Couleur</span>
+            <input type="color" id="myColor" onchange="changeColor()">
+            <br>
+            <span>Couleur de fond</span>
+            <input type="color" id="myColor2" onchange="changeColor2()" value="#FFFFFF">
+            <br>
+			<span>Stylo</span>
+            <input id="stylo" type="button" value="Stylo">
+            <br>
+			<span>Gomme</span>
+            <input id="gomme" type="button" value="Gomme">
+            <br>
+            <span>Taille</span>
+            <input id="petit" type="button" value="Petit">
+            <input id="normal" type="button" value="Normal">
+            <input id="grand" type="button" value="Grand">
+            <input id="enorme" type="button" value="Enorme">
+            <br>
+            <span>Efface le canvas</span>
+            <input id="effacer" type="button" value="Effacer">
+            <br>
+            <button id='btnSave' onclick="save()">Sauvegarder</button>
+            <br>
+            <input type='file' name='img' id='uploadimage' onchange="openImage()"/>
+        </div>
+        <script language="JavaScript" type="text/JavaScript" src="script.js">
+        </script>
+    </body>
+</html>

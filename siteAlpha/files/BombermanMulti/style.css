@@ -1,0 +1,19 @@
+* {
+    margin-top: -4px;
+    padding: 0px;
+}
+
+#canvas {
+    width: 650px;
+    margin: auto;
+}
+
+#sols {
+    width: 650px;
+    margin: auto;
+}
+
+#dynamique {
+    width: 650px;
+    margin: auto;
+}

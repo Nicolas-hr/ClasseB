@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <title>jeu</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body id="bodyGame" onload="loader()">
+
+    <!-- <div id="s1" class="stars" style="display: none"></div>
+    <div id="s2" class="stars2" style="display: none"></div>
+    <div id="s3" class="stars3" style="display: none"></div> -->
+    <div id="scene">
+        <p id="score"> </p>
+    </div>
+
+    <script src="js/build/three.js"></script>
+    <script src="js/build/Tween.js"></script>
+    <script>
+        var sceneWidth;
+        var sceneHeight;
+        var camera;
+        var scene;
+        var renderer;
+        var dom;
+        var sun;
+        var ground;
+
+
+        var joueur;
+        var ennemi;
+        var boost;
+
+
+        var compteur = 0;
+        var cmptBoost = 0;
+        var vitesseEnnemi = 30;
+        var vitesseJoueur = 0.2;
+        var score = 0;
+
+
+        var ailes;
+
+
+
+
+        var Adroite = false;
+        var AGauche = false;
+        var EnAvant = false;
+        var EnArriere = false;
+        var EnBas = false;
+        var EnHaut = false;
+
+
+        var murGauche;
+        var murDroite;
+
+        var timerMoveEnnemi = setInterval(EnnemiAvance, 16);
+        var timerCreateEnnemi = setInterval(CreateEnnemi, 1000);
+        var timerBoost = setInterval(SpawnBoost, 1000);
+
+        init();
+
+
+        function init() {
+            createScene();
+
+            update();
+
+        }
+
+        function createScene() {
+
+
+
+            //Initialise la scene
+            sceneWidth = window.innerWidth;
+            sceneHeight = window.innerHeight;
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(60, sceneWidth / sceneHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({
+                alpha: true
+            });
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.setSize(sceneWidth, sceneHeight);
+            dom = document.getElementById('scene');
+            dom.appendChild(renderer.domElement);
+
+
+
+            //Ajoute le sol
+            var planeGeometry = new THREE.PlaneGeometry(20, 1000, 4);
+            var planeMaterial = new THREE.MeshPhongMaterial({
+                color: 0x255bb2
+            })
+            ground = new THREE.Mesh(planeGeometry, planeMaterial);
+            ground.material.side = THREE.DoubleSide;
+            ground.receiveShadow = true;
+            ground.castShadow = false;
+            ground.rotation.x = -Math.PI / 2;
+            // scene.add(ground);
+
+
+            //Murs
+            var cubeGeometry = new THREE.CubeGeometry(2, 5, 1000);
+            var cubeMaterial = new THREE.MeshLambertMaterial({
+                color: 0x5e78a3
+            });
+            murGauche = new THREE.Mesh(cubeGeometry, cubeMaterial);
+            murDroite = new THREE.Mesh(cubeGeometry, cubeMaterial);
+            murGauche.position.set(-10, 2.5, 10);
+            murDroite.position.set(10, 2.5, 10);
+            //scene.add(murGauche);
+            // scene.add(murDroite);
+
+
+
+            //Ajoute joueur
+            var cubeGeometry = new THREE.CubeGeometry(1, 0.5, 3);
+            var cubeMaterial = new THREE.MeshPhongMaterial({
+                color: 0xfcfffc
+            });
+            joueur = new THREE.Mesh(cubeGeometry, cubeMaterial);
+            joueur.position.set(0, 2, 480);
+
+
+            var cubeGeometry = new THREE.CubeGeometry(4, 0.1, 0.6);
+            var cubeMaterial = new THREE.MeshPhongMaterial({
+                color: 0xe3e8e3
+            });
+            ailes = new THREE.Mesh(cubeGeometry, cubeMaterial);
+
+            joueur.add(ailes);
+            scene.add(joueur);
+
+
+            //Ajoute la lumière
+            var light = new THREE.AmbientLight(0x404040); // soft white light
+            scene.add(light);
+
+            var light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
+            scene.add(light);
+
+
+            //Position de la camera
+            camera.position.z = 500;
+            camera.position.y = 10;
+            camera.position.x = 0;
+            camera.rotation.x = -0.5;
+
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+
+        //Mouvements au clavier
+        document.addEventListener("keydown", onDocumentKeyDown, false);
+        document.addEventListener("keyup", onDocumentKeyUp, false);
+
+        function onDocumentKeyDown(event) {
+
+            var keyCode = event.which;
+            if (keyCode == 32) {
+                jump(); //A FAIRE
+            }
+
+            if (keyCode == 65) {
+                AGauche = true;
+
+            }
+            if (keyCode == 68) {
+                Adroite = true;
+
+            }
+            if (keyCode == 87) {
+                EnHaut = true;
+            }
+            if (keyCode == 83) {
+                EnBas = true;
+            }
+
+        };
+
+        function onDocumentKeyUp(event) {
+
+            var keyCode = event.which;
+            if (keyCode == 32) {
+                jump(); //A FAIRE
+            }
+
+            if (keyCode == 65) {
+                AGauche = false;
+
+            }
+            if (keyCode == 68) {
+                Adroite = false;
+            }
+            if (keyCode == 87) {
+                EnHaut = false;
+            }
+            if (keyCode == 83) {
+                EnBas = false;
+            }
+
+
+
+
+        };
+
+
+
+        function update() {
+            render();
+            requestAnimationFrame(update);
+            CheckCollision();
+
+
+            if (Adroite) {
+                joueur.translateX(vitesseJoueur);
+            }
+            if (AGauche) {
+                joueur.translateX(-vitesseJoueur);
+
+            }
+
+            if (EnBas) {
+                joueur.translateY(-vitesseJoueur);
+
+
+            }
+            if (EnHaut) {
+                joueur.translateY(vitesseJoueur);
+
+            }
+
+        }
+
+        function CheckCollision() {
+            if (joueur.position.x > murDroite.position.x - 3) {
+                joueur.position.x = murDroite.position.x - 3;
+                Adroite = false;
+            }
+            if (joueur.position.x < murGauche.position.x + 2) {
+                joueur.position.x = murGauche.position.x + 2;
+                Adroite = false;
+            }
+
+            if (joueur.position.y <= ground.position.y + 0.5) {
+                joueur.position.y = ground.position.y + 0.5;
+                EnBas = false;
+            }
+
+            if (joueur.position.y >= ground.position.y + 10) {
+                joueur.position.y = ground.position.y + 10;
+                EnHaut = false;
+            }
+
+
+
+
+
+        }
+
+        function CreateEnnemi() {
+            var ennemiPosX = Math.floor(Math.random() * 20) - 10;
+            var ennemiPosY = Math.floor(Math.random() * 10) - 0;
+
+            var cubeGeometry = new THREE.CubeGeometry(3, 2, 4);
+            var cubeMaterial = new THREE.MeshPhongMaterial({
+                color: 0xaf1313
+            });
+            ennemi = new THREE.Mesh(cubeGeometry, cubeMaterial);
+            ennemi.position.set(ennemiPosX, ennemiPosY, 10);
+            ennemi.name = "ennemi" + compteur;
+
+            var cubeGeometry = new THREE.CubeGeometry(8, 0.1, 0.6);
+            var cubeMaterial = new THREE.MeshPhongMaterial({
+                color: 0xe3e8e3
+            });
+            ailes = new THREE.Mesh(cubeGeometry, cubeMaterial);
+
+            ennemi.add(ailes);
+            scene.add(ennemi);
+            compteur++;
+
+        }
+
+
+        function CreateBoost() {
+            var boostPosX = Math.floor(Math.random() * 20) - 10;
+            var boostPosY = Math.floor(Math.random() * 10) - 0;
+
+            var cubeGeometry = new THREE.CubeGeometry(1, 1, 2);
+            var cubeMaterial = new THREE.MeshPhongMaterial({
+                color: 0x0763f7
+            });
+            boost = new THREE.Mesh(cubeGeometry, cubeMaterial);
+            boost.position.set(boostPosX, boostPosY, 10);
+            boost.name = "boost" + cmptBoost;
+
+            scene.add(boost);
+            cmptBoost++;
+
+        }
+
+
+        function SpawnBoost() {
+
+            for (j = 0; j < scene.children.length; j++) {
+                if (scene.children[j].name.indexOf("boost") >= 0) {
+                    scene.children[j].translateZ(Math.floor(Math.random() * 5) / 10 + 1);
+                    if (collisionitems(joueur, scene.children[j])) {
+                        scene.remove(scene.children[j]);
+                        vitesseJoueur += 0.2;
+                    }
+                }
+            }
+
+        }
+
+
+
+        function EnnemiAvance() {
+
+            for (i = 0; i < scene.children.length; i++) {
+                if (scene.children[i].name.indexOf("ennemi") >= 0) {
+                    scene.children[i].translateZ(Math.floor(Math.random() * vitesseEnnemi) / 10 + 1);
+                    if (collisionitems(joueur, scene.children[i])) {
+                        scene.remove(scene.children[i]);
+                        score++;
+                        document.getElementById("score").innerHTML = "Score : " + score;
+                    }
+                }
+            }
+
+        }
+
+
+
+
+
+        function collisionitems(obj1, obj2) {
+            return obj1.position.x >= obj2.position.x - 1.5 && obj1.position.x <= obj2.position.x + 1.5 &&
+                obj1.position.y >= obj2.position.y - 1.5 && obj1.position.y <= obj2.position.y + 1.5 &&
+                obj1.position.z >= obj2.position.z - 1.5 && obj1.position.z <= obj2.position.z + 1.5;
+
+        }
+
+
+
+
+
+
+        function render() {
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            //Qd on diminue la fenetre
+            sceneHeight = window.innerHeight;
+            sceneWidth = window.innerWidth;
+            renderer.setSize(sceneWidth, sceneHeight);
+            camera.aspect = sceneWidth / sceneHeight;
+            camera.updateProjectionMatrix();
+        }
+
+    </script>
+    <script>
+        var myVar;
+
+        function loader() {
+            myVar = setTimeout(showPage, 500);
+        }
+
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("scene").style.display = "block";
+            document.getElementById("s1").style.display = "block";
+            document.getElementById("s2").style.display = "block";
+            document.getElementById("s3").style.display = "block";
+            document.getElementById("score").style.display = "block";
+        }
+
+    </script>
+</body>
+
+</html>

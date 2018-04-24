@@ -1,0 +1,21 @@
+*
+{
+
+    position: relative;
+}
+
+body
+{
+    background-color: #009999;
+    position: relative;
+    margin: auto;
+    margin-top: 10px;
+}
+
+#cibles{
+    background-color: #FFFFFF;
+    margin: auto;
+    width: 1200px;
+    height: 800px;
+    margin-top: 80px;
+}
