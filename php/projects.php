@@ -13,29 +13,35 @@ function showProjects() {
     echo '</table>';
 }
 
-function uploadProject( )
+function uploadProject()
 {
-  $target_dir = "uploads/";
-  $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-  $projectFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-  $nbError = 0;
+    $file_name = $_FILES['fileToUpload']['name'];
+    $file_tmp_name = $_FILES['fileToUpload']['tmp_name'];
+    $zip = new ZipArchive();
 
-  $nameFile = filter_input(INPUT_POST, "fileName", FILTER_SANITIZE_STRING);
+    if (isset($file_name)) {
+        if (!empty($file_name)) {
+            $location = '../uploads/';
 
-  $errors = array();
+            if (move_uploaded_file($file_tmp_name, $location . $file_name)) {
+                echo "Uploaded !";
 
-  // Verifie si le fichier est une partition
-  if(isset($_POST["submit"])) {
-    if($projectFileType != "zip") {
-        $errors["extension"] = "Juste les fichier .zip ou les dossier sont acceptés sur ce site.";
+                if ($zip->open($location . $file_name) === true) {
+                    $zip->extractTo($location);
+                    $zip->close();
+                }
+                else {
+                    echo "unzip fail";
+                }
+
+                unlink($location . $file_name);
+            }
+        }
+        else {
+            echo "Choose a file";
+        }
     }
-    // Check if file already exists
-    elseif (file_exists($target_file)) {
-       $errors["fichierExistant"] = "Sorry, file already exists.";
-    }
-  }
 
-  if(count($errors) == 0){
     header("Location: index.php");
-  }
+    exit;
 }
