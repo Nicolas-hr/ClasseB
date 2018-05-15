@@ -8,3 +8,8 @@ function showProjects() {
     }
     echo '</table>';
 }
+
+function uploadProject( )
+{
+  echo "upload projet";
+}
