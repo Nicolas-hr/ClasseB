@@ -20,7 +20,7 @@ if (filter_input(INPUT_POST, 'submit')) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <title>Formualire uploads</title>
+    <title>Formulaire de mise en ligne</title>
     <style>
         .error {
             color: red;
@@ -29,14 +29,14 @@ if (filter_input(INPUT_POST, 'submit')) {
 </head>
 <body>
 <div class="container text-left">
-    <div class="row">
+    <div class="row mt-5">
         <div class="col s9 m9">
             <form action="uploadsForm.php" method="post" enctype="multipart/form-data">
                 <div class="custom-file">
                     <input type="file" name="fileToUpload" class="" id="fileToUpload">
                     <label class="custom-file-label" for="fileToUpload">Choose file</label>
                 </div>
-                <input class="btn btn-primary" type="submit" value="Upload project" name="submit">
+                <input class="btn btn-primary mt-3" type="submit" value="Upload project" name="submit">
             </form>
         </div>
     </div>
@@ -49,12 +49,26 @@ if (filter_input(INPUT_POST, 'submit')) {
     </div>
     <div class="error">
         <?php
-        if (isset($errors['extension'])) {
-            echo $errors['extension'];
-        } elseif (isset($errors['fileToUpload'])) {
-            echo $errors['fileToUpload'];
-        } elseif (isset($errors['fichierExistant'])) {
-            echo $errors['fichierExistant'];
+        if (filter_input(INPUT_GET, 'error')) {
+
+            switch (filter_input(INPUT_GET, 'error')) {
+                case 1:
+                    echo '<div class="p-3 mb-2 bg-success text-white">';
+                    echo '<p class="mb-0">Fichier .zip mis en ligne !</p>';
+                    echo '<p class="mb-0"><a href="index.php" class="text-white btn btn-primary mt-2">Revenir à l\'accueil</a></p>';
+                    break;
+
+                case 2:
+                    echo '<div class="p-3 mb-2 bg-danger text-white">';
+                    echo '<p class="mb-0">Veuillez choisir un fichier.</p>';
+                    break;
+
+                case 3:
+                    echo '<div class="p-3 mb-2 bg-danger text-white">';
+                    echo '<p class="mb-0">Erreur de dézippage.</p>';
+                    break;
+            }
+            echo '</div>';
         }
         ?>
     </div>

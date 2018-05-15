@@ -8,7 +8,7 @@
 
             $LINKS = array(
                 "index.php" => "Accueil",
-                "uploadsForm.php" => "Upload");
+                "uploadsForm.php" => "Mise en ligne");
 
             foreach ($LINKS as $key => $value) {
                 if ($key == $currentPage) {
@@ -17,8 +17,6 @@
                     echo "<li><a class='nav-link' href='" . $key . "'>" . $value . "</a></li>";
                 }
             }
-
-
             ?>
         </ul>
     </div>

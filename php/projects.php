@@ -15,6 +15,10 @@ function showProjects() {
 
 function uploadProject()
 {
+    define("SUCCESS", 1);
+    define("NO_CHOSSEN_FILE", 2);
+    define("ZIP_ERROR", 3);
+
     $file_name = $_FILES['fileToUpload']['name'];
     $file_tmp_name = $_FILES['fileToUpload']['tmp_name'];
     $zip = new ZipArchive();
@@ -24,24 +28,27 @@ function uploadProject()
             $location = '../uploads/';
 
             if (move_uploaded_file($file_tmp_name, $location . $file_name)) {
-                echo "Uploaded !";
-
                 if ($zip->open($location . $file_name) === true) {
                     $zip->extractTo($location);
                     $zip->close();
                 }
                 else {
-                    echo "unzip fail";
+                    $errorFile = ZIP_ERROR;
                 }
 
                 unlink($location . $file_name);
             }
         }
         else {
-            echo "Choose a file";
+            $errorFile = NO_CHOSSEN_FILE;
         }
     }
 
-    header("Location: index.php");
-    exit;
+    if (!isset($errorFile)) {
+        header("Location: uploadsForm.php?error=" . SUCCESS);
+        exit;
+    } else {
+        header("Location: uploadsForm.php?error=" . $errorFile);
+        exit;
+    }
 }
