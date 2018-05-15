@@ -15,20 +15,64 @@ require_once './projects.php';
     <title>Classe 2B</title>
 </head>
 <body>
-<?php include_once "nav.php" ?>
+<?php require_once "nav.php" ?>
 
 <div id="main" class="mt-3 container">
 
-    <h1 id="title">Bienvenue sur le site de la Classe 2B</h1>
-    <p id="legend">Nous sommes la classe 2b du CFPT Informatique</p>
+    <h1 id="title" class="display-4">Bienvenue sur le site de la Classe I.DA/FA-P2B</h1>
 
+    <div class="card text-center mt-5">
+        <div class="card-header">
+            <h4 class="">Informations</h4>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Qui sommes-nous?</h5>
+            <p class="card-text">
+                Nous sommes une classe de 2ème année de l'école d'informatique du CFPT. Chacun d'entre nous crée des
+                projets que vous pourrez retrouvez ici. Notre domaine de prédiliction est le software, et le
+                développement d'applications.
+            </p>
+
+            <h5 class="card-title">Que faisons-nous?</h5>
+            <div class="row">
+                <div class="col s12 m3">
+                    <img src="../images/cSharp.bmp" alt="" class="card-img-top rounded-circle w-50 h-50 mt-3">
+                    <h2 class="card-title mt-3">C#</h2>
+                    <p class="card-text mb-3">
+                        Developpement d'application
+                    </p>
+                </div>
+                <div class="col s12 m3">
+                    <img src="../images/html.jpg" alt="" class="card-img-top rounded-circle w-50 h-50 mt-3">
+                    <h2 class="card-title mt-3">HTML</h2>
+                    <p class="card-text mb-3">
+                        Mise en page de site web
+                    </p>
+                </div>
+                <div class="col s12 m3">
+                    <img src="../images/js.png" alt="" class="card-img-top rounded-circle w-50 h-50 mt-3">
+                    <h2 class="card-title mt-3">JS</h2>
+                    <p class="card-text mb-3">
+                        Scripting de site web
+                    </p>
+                </div>
+                <div class="col s12 m3">
+                    <img src="../images/php.jpg" alt="" class="card-img-top rounded-circle w-50 h-50 mt-3">
+                    <h2 class="card-title mt-3">PHP</h2>
+                    <p class="card-text mb-3">
+                        Interaction serveur
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?php showProjects() ?>
 
 </div>
 
-
 <?php include_once "footer.php" ?>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
