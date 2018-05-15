@@ -29,7 +29,7 @@ require_once 'projects.php';
         <br>
         projet/
         <br>
-        └─ logo/
+        └─ projetInfo/
         <br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ imgRep.jpg
         <br>
