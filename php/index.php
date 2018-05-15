@@ -17,7 +17,7 @@ require_once './projects.php';
 <body>
 <?php include_once "nav.php" ?>
 
-<div class="container">
+<div id="main" class="container">
 
     <h1 id="title">Bienvenue sur le site de la Classe 2B</h1>
     <p id="legend">Nous sommes la classe 2b du CFPT Informatique</p>
