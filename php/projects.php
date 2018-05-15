@@ -1,16 +1,38 @@
 <?php
-function showProjects() {
+function showProjects()
+{
     $dir = "../uploads/";
 
-    echo '<table>';
+    echo '<div class="row">';
+
     foreach (scandir($dir) as $project) {
         if ($project != "." && $project != "..") {
-            echo '<tr>';
-            echo '<td>' . $project . '</td>';
-            echo '</tr>';
+            echo '<div class="col-sm-12 col-md-6 col-lg-4 mb-4 p-0">';
+            echo '<div class="card mx-auto" style="width: 18rem;">';
+            if (file_exists('../uploads/' . $project . '/logo/imgRep.jpg')) {
+                echo '<img class="card-img-top" src="../uploads/' . $project . '/logo/imgRep.jpg" alt="Card image cap">';
+            } else {
+                echo '<img class="card-img-top" src="../images/default-thumbnail.jpg" alt="Card image cap">';
+            }
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">' . $project . '</h5>';
+            echo '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>';
+            echo '</div>';
+            echo '<div class="card-body">';
+            if (file_exists('../uploads/' . $project . '/index.php')) {
+                echo '<a href="../uploads/' . $project . '/index.php" class="card-link btn btn-info w-100">JOUER</a>';
+            } else {
+                if (file_exists('../uploads/' . $project . '/index.html')) {
+                    echo '<a href="../uploads/' . $project . '/index.html" class="card-link btn btn-info w-100">JOUER</a>';
+                }
+            }
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
         }
     }
-    echo '</table>';
+
+    echo '</div>';
 }
 
 function uploadProject()
@@ -31,15 +53,13 @@ function uploadProject()
                 if ($zip->open($location . $file_name) === true) {
                     $zip->extractTo($location);
                     $zip->close();
-                }
-                else {
+                } else {
                     $errorFile = ZIP_ERROR;
                 }
 
                 unlink($location . $file_name);
             }
-        }
-        else {
+        } else {
             $errorFile = NO_CHOSSEN_FILE;
         }
     }

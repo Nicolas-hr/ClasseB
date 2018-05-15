@@ -19,11 +19,11 @@ require_once './projects.php';
 
 <div id="main" class="mt-3 container">
 
-    <h1 id="title" class="display-4">Bienvenue sur le site de la Classe I.DA/FA-P2B</h1>
+    <h1 id="title" class="display-4 mb-5">Bienvenue sur le site de la Classe I.DA/FA-P2B</h1>
 
-    <div class="card text-center mt-5">
+    <div class="card text-center mb-5">
         <div class="card-header">
-            <h4 class="">Informations</h4>
+            <h4>Informations</h4>
         </div>
         <div class="card-body">
             <h5 class="card-title">Qui sommes-nous?</h5>
@@ -35,29 +35,29 @@ require_once './projects.php';
 
             <h5 class="card-title">Que faisons-nous?</h5>
             <div class="row">
-                <div class="col s12 m3">
-                    <img src="../images/cSharp.bmp" alt="" class="card-img-top rounded-circle w-50 h-50 mt-3">
+                <div class="col-sm-12 col-md-6 col-lg-3 pl-5 pr-5">
+                    <img src="../images/cSharp.bmp" alt="" class="card-img-top rounded-circle mt-3 img-thumbnail">
                     <h2 class="card-title mt-3">C#</h2>
                     <p class="card-text mb-3">
                         Developpement d'application
                     </p>
                 </div>
-                <div class="col s12 m3">
-                    <img src="../images/html.jpg" alt="" class="card-img-top rounded-circle w-50 h-50 mt-3">
+                <div class="col-sm-12 col-md-6 col-lg-3 pl-5 pr-5">
+                    <img src="../images/html.jpg" alt="" class="card-img-top rounded-circle mt-3 img-thumbnail">
                     <h2 class="card-title mt-3">HTML</h2>
                     <p class="card-text mb-3">
                         Mise en page de site web
                     </p>
                 </div>
-                <div class="col s12 m3">
-                    <img src="../images/js.png" alt="" class="card-img-top rounded-circle w-50 h-50 mt-3">
+                <div class="col-sm-12 col-md-6 col-lg-3 pl-5 pr-5">
+                    <img src="../images/js.png" alt="" class="card-img-top rounded-circle mt-3 img-thumbnail">
                     <h2 class="card-title mt-3">JS</h2>
                     <p class="card-text mb-3">
                         Scripting de site web
                     </p>
                 </div>
-                <div class="col s12 m3">
-                    <img src="../images/php.jpg" alt="" class="card-img-top rounded-circle w-50 h-50 mt-3">
+                <div class="col-sm-12 col-md-6 col-lg-3 pl-5 pr-5">
+                    <img src="../images/php.jpg" alt="" class="card-img-top rounded-circle mt-3 img-thumbnail">
                     <h2 class="card-title mt-3">PHP</h2>
                     <p class="card-text mb-3">
                         Interaction serveur
@@ -67,7 +67,15 @@ require_once './projects.php';
         </div>
     </div>
 
-    <?php showProjects() ?>
+    <div class="card text-center mb-5">
+        <div class="card-header">
+            <h4>Projets</h4>
+        </div>
+
+        <div class="card-body">
+            <?php showProjects() ?>
+        </div>
+    </div>
 
 </div>
 

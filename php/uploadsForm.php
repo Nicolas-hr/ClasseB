@@ -21,24 +21,28 @@ if (filter_input(INPUT_POST, 'submit')) {
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Formulaire de mise en ligne</title>
-    <style>
-        .error {
-            color: red;
-        }
-    </style>
 </head>
 <body>
 <div class="container text-left">
-    <div class="row mt-5">
-        <div class="col s9 m9">
-            <form action="uploadsForm.php" method="post" enctype="multipart/form-data">
-                <div class="custom-file">
-                    <input type="file" name="fileToUpload" class="" id="fileToUpload">
-                    <label class="custom-file-label" for="fileToUpload">Choose file</label>
+    <h1 class="display-4 w-100 text-center mt-3 pb-3 border-bottom border-dark">
+        Mise en ligne de projet
+    </h1>
+
+    <div class="row mt-4">
+        <form action="uploadsForm.php" method="post" enctype="multipart/form-data" class="col s12 m12">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12 mb-3">
+                    <div class="custom-file">
+                        <input type="file" name="fileToUpload" class="" id="fileToUpload">
+                        <label class="custom-file-label" for="fileToUpload">Choose file</label>
+                    </div>
                 </div>
-                <input class="btn btn-primary mt-3" type="submit" value="Upload project" name="submit">
-            </form>
-        </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12 text-center">
+                    <input class="btn btn-primary w-100" type="submit" value="Upload project" name="submit">
+                </div>
+            </div>
+        </form>
     </div>
     <div class="row">
         <div class="col s12 m12">
