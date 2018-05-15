@@ -30,6 +30,23 @@
 	  <li class="nav-item">
         <a class="nav-link" href="#">Connexion</a>
       </li>
+	  <?php
+        $currentPage = basename($_SERVER['PHP_SELF']);
+
+        $LINKS = array("index.php" => "Accueil",
+            "uploadsForm.php" => "Upload");
+
+        foreach ($LINKS as $key => $value) {
+            if ($key == $currentPage) {
+                echo "<li><a href='" . $key . "' style='color:grey;'>" . $value . "</a></li>";
+            }
+            else{
+                echo "<li><a href='" . $key . "'>" . $value . "</a></li>";
+            }
+        }
+
+
+        ?>
     </ul>
   </div>
 </nav>
