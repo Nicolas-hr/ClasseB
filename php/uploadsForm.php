@@ -1,13 +1,5 @@
 <?php
-include 'nav.php';
 require_once 'projects.php';
-
-$nbError = isset($nbError) ? $nbError : "";
-$errors = isset($errors) ? $errors : "";
-
-if (filter_input(INPUT_POST, 'submit')) {
-    uploadProject();
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,10 +15,28 @@ if (filter_input(INPUT_POST, 'submit')) {
     <title>Formulaire de mise en ligne</title>
 </head>
 <body>
+<?php include 'nav.php'; ?>
+
 <div class="container text-left">
     <h1 class="display-4 w-100 text-center mt-3 pb-3 border-bottom border-dark">
         Mise en ligne de projet
     </h1>
+
+    <p class="blockquote bg-light border-warning p-3 mt-3" style="border-left: solid 3px">
+        Pour avoir une image de référence, celle-ci doit être nommée <mark>"imgRep.jpg"</mark> et ce trouvée dans un
+        dossier nommé <mark>"projetInfo"</mark> situé à la racine de votre projet.
+        <br>
+        <br>
+        projet/
+        <br>
+        └─ logo/
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ imgRep.jpg
+        <br>
+        <br>
+        Et pour avoir une description, mettez la dans le même dossier que l'image mais cette fois ci, nommé le fichier
+        <mark>"description.txt"</mark>
+    </p>
 
     <div class="row mt-4">
         <form action="uploadsForm.php" method="post" enctype="multipart/form-data" class="col s12 m12">
@@ -34,12 +44,12 @@ if (filter_input(INPUT_POST, 'submit')) {
                 <div class="col-lg-9 col-md-9 col-sm-12 mb-3">
                     <div class="custom-file">
                         <input type="file" name="fileToUpload" class="" id="fileToUpload">
-                        <label class="custom-file-label" for="fileToUpload">Choose file</label>
+                        <label class="custom-file-label" for="fileToUpload">Choisir un fichier .zip</label>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-3 col-sm-12 text-center">
-                    <input class="btn btn-primary w-100" type="submit" value="Upload project" name="submit">
+                    <input class="btn btn-primary w-100" type="submit" value="Mettre en ligne" name="submit">
                 </div>
             </div>
         </form>

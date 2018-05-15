@@ -9,14 +9,18 @@ function showProjects()
         if ($project != "." && $project != "..") {
             echo '<div class="col-sm-12 col-md-6 col-lg-4 mb-4 p-0">';
             echo '<div class="card mx-auto" style="width: 18rem;">';
-            if (file_exists('../uploads/' . $project . '/logo/imgRep.jpg')) {
-                echo '<img class="card-img-top" src="../uploads/' . $project . '/logo/imgRep.jpg" alt="Card image cap">';
+            if (file_exists('../uploads/' . $project . '/projetInfo/imgRep.jpg')) {
+                echo '<img class="card-img-top" src="../uploads/' . $project . '/projetInfo/imgRep.jpg" alt="Card image cap">';
             } else {
                 echo '<img class="card-img-top" src="../images/default-thumbnail.jpg" alt="Card image cap">';
             }
             echo '<div class="card-body">';
             echo '<h5 class="card-title">' . $project . '</h5>';
-            echo '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>';
+            if (file_exists('../uploads/' . $project . '/projetInfo/description.txt')) {
+                echo '<p class="card-text text-truncate">' . file_get_contents('../uploads/' . $project . '/projetInfo/description.txt') . '</p>';
+            } else {
+                echo '<p class="card-text">Description manquante</p>';
+            }
             echo '</div>';
             echo '<div class="card-body">';
             if (file_exists('../uploads/' . $project . '/index.php')) {
@@ -24,6 +28,8 @@ function showProjects()
             } else {
                 if (file_exists('../uploads/' . $project . '/index.html')) {
                     echo '<a href="../uploads/' . $project . '/index.html" class="card-link btn btn-info w-100">JOUER</a>';
+                } else {
+                    echo '<a href="#" class="card-link btn btn-info w-100 disabled">JOUER</a>';
                 }
             }
             echo '</div>';
@@ -71,4 +77,8 @@ function uploadProject()
         header("Location: uploadsForm.php?error=" . $errorFile);
         exit;
     }
+}
+
+if (filter_input(INPUT_POST, 'submit')) {
+    uploadProject();
 }

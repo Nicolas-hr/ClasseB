@@ -23,7 +23,7 @@ require_once './projects.php';
 
     <div class="card text-center mb-5">
         <div class="card-header">
-            <h4>Informations</h4>
+            <h4 class="text-uppercase">Informations</h4>
         </div>
         <div class="card-body">
             <h5 class="card-title">Qui sommes-nous?</h5>
@@ -69,7 +69,7 @@ require_once './projects.php';
 
     <div class="card text-center mb-5">
         <div class="card-header">
-            <h4>Projets</h4>
+            <h4 class="text-uppercase">Projets</h4>
         </div>
 
         <div class="card-body">
