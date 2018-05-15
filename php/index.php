@@ -15,12 +15,17 @@ require_once './projects.php';
     <title>Hello, world!</title>
 </head>
 <body>
-<?php include_once "nav.php"?>
+<?php include_once "nav.php" ?>
+
+<div class="container">
+
+    <h1>Bienvenue sur le site de la Classe 2B</h1>
+    <?php showProjects() ?>
+
+</div>
 
 
-<?php showProjects() ?>
-
-<?php include_once "footer.php"?>
+<?php include_once "footer.php" ?>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
