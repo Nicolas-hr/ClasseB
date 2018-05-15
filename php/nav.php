@@ -21,6 +21,9 @@
 	  <li class="nav-item">
         <a class="nav-link" href="#">Contact</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="uploadsForm.php">Upload</a>
+      </li>
 	  <li class="nav-item">
         <a class="nav-link" href="#">Inscription</a>
       </li>
