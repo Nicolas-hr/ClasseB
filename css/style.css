@@ -1,0 +1,11 @@
+body{
+    background-color: aquamarine;
+}
+
+.container{
+    background-color: red;
+}
+
+#title, #legend{
+    text-align: center;
+}

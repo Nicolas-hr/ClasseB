@@ -11,15 +11,18 @@ require_once './projects.php';
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <title>Classe 2B</title>
 </head>
 <body>
 <?php include_once "nav.php" ?>
 
 <div class="container">
 
-    <h1>Bienvenue sur le site de la Classe 2B</h1>
+    <h1 id="title">Bienvenue sur le site de la Classe 2B</h1>
+    <p id="legend">Nous sommes la classe 2b du CFPT Informatique</p>
+
+
     <?php showProjects() ?>
 
 </div>
