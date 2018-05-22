@@ -14,8 +14,7 @@
             $LINKS = array(
                 "index.php" => "Accueil",
                 "uploadsForm.php" => "Mise en ligne",
-                "register.php" => "Inscription",
-                "login.php" => "Connexion",
+                "registerForm.php" => "Inscription",
                 "newsForm.php" => "Les news"
             );
 
