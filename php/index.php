@@ -6,7 +6,7 @@
 * Date de création : 08.05.2018                                              *
 ******************************************************************************/
 
-require_once './projects.php';
+require_once '../lib/projects.php';
 ?>
 <!doctype html>
 <html lang="en">

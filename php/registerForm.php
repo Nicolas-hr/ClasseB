@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once "dbConnect.php";
+require_once "../lib/dbConnect.php";
 
 //VARIALES DANS LA SESSION
 if (!isset($_SESSION['firstNameReg'])) {

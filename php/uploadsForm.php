@@ -1,5 +1,5 @@
 <?php
-require_once 'projects.php';
+require_once '../lib/projects.php';
 ?>
 <!DOCTYPE html>
 <html>
