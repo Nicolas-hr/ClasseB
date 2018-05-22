@@ -20,20 +20,19 @@
 <?php require_once 'nav.php'; ?>
 
 <main class="container">
-    <form class="form-signin text-center">
-        <img class="mb-4 rounded" src="../images/php.jpg" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+    <form class="form-signin">
+        <div id="headerForm" class="text-center">
+            <img class="mb-4 rounded" src="../images/php.jpg" alt="" width="72" height="72">
+
+            <h1 class="h3 font-weight-normal">Connexion</h1>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+
+        <input type="email" id="email" name="email" class="form-control first" placeholder="Adresse email" required>
+
+        <input type="password" id="pwd" name="pwd" class="form-control last" placeholder="Mot de passe" required>
+
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Connexion" name="login">
+        <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
     </form>
 </main>
 

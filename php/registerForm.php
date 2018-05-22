@@ -20,20 +20,33 @@
 <?php require_once 'nav.php'; ?>
 
 <main class="container">
-    <form class="form-signin text-center">
-        <img class="mb-4 rounded" src="../images/php.jpg" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox mb-3">
+    <form class="form-signin">
+        <div id="headerForm" class="text-center">
+            <img class="mb-4 rounded" src="../images/php.jpg" alt="" width="72" height="72">
+
+            <h1 class="h3 font-weight-normal">Inscription</h1>
+        </div>
+
+        <input type="text" id="first" name="first" class="form-control first" placeholder="Prénom" required autofocus>
+
+        <input type="text" id="last" name="last" class="form-control" placeholder="Nom" required>
+
+        <input type="text" id="username" name="username" class="form-control" placeholder="Pseudo" required>
+
+        <input type="email" id="email" name="email" class="form-control" placeholder="Adresse email" required>
+
+        <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Mot de passe" required>
+
+        <input type="password" id="pwdConfirme" name="pwdConfirme" class="form-control last" placeholder="Confirmer votre mot de passe" required>
+
+        <div class="checkbox mb-3 mt-3 text-center">
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Inscription" name="register">
+        <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
     </form>
 </main>
 
