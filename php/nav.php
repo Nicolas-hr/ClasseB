@@ -17,7 +17,6 @@
                 "register.php" => "Inscription",
                 "login.php" => "Connexion",
                 "newsForm.php" => "Les news"
-              );
             );
 
             foreach ($LINKS as $key => $value) {
