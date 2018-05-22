@@ -1,6 +1,8 @@
+<?php require_once 'security.php'; ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="index.php">Classe 2b</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -11,13 +13,24 @@
 
             $LINKS = array(
                 "index.php" => "Accueil",
-                "uploadsForm.php" => "Mise en ligne");
+                "uploadsForm.php" => "Mise en ligne",
+                "register.php" => "Inscription",
+                "login.php" => "Connexion",
+            );
 
             foreach ($LINKS as $key => $value) {
-                if ($key == $currentPage) {
-                    echo "<li class='nav-item active'><a class='nav-link' href='" . $key . "' >" . $value . "</a></li>";
+                if (isLogged()) {
+                    if ($key == $currentPage && !strpos("register", $key) && !strpos("login", $key)) {
+                        echo "<li class='nav-item active'><a class='nav-link' href='" . $key . "' >" . $value . "</a></li>";
+                    } else {
+                        echo "<li><a class='nav-link' href='" . $key . "'>" . $value . "</a></li>";
+                    }
                 } else {
-                    echo "<li><a class='nav-link' href='" . $key . "'>" . $value . "</a></li>";
+                    if ($key == $currentPage) {
+                        echo "<li class='nav-item active'><a class='nav-link' href='" . $key . "' >" . $value . "</a></li>";
+                    } else {
+                        echo "<li><a class='nav-link' href='" . $key . "'>" . $value . "</a></li>";
+                    }
                 }
             }
             ?>
