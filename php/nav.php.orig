@@ -14,11 +14,14 @@
             $LINKS = array(
                 "index.php" => "Accueil",
                 "uploadsForm.php" => "Mise en ligne",
+<<<<<<< HEAD
                 "register.php" => "Inscription",
                 "login.php" => "Connexion",
+            );
+=======
                 "newsForm.php" => "Les news"
               );
-            );
+>>>>>>> 33b2e4bb639f3e0852d94f6550314ab2db6571e6
 
             foreach ($LINKS as $key => $value) {
                 if (isLogged()) {
