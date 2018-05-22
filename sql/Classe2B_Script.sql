@@ -58,18 +58,18 @@ CREATE TABLE IF NOT EXISTS `Classe2B`.`Tbl_User` (
   `Txt_Password_Salt` VARCHAR(45) NOT NULL,
   `Txt_Image_Profil` VARCHAR(45) NOT NULL,
   `Txt_Description_Profil` VARCHAR(255) NOT NULL,
-  `Tbl_Email_Id_Email` INT NOT NULL,
-  `Tbl_News_Id_News` INT NOT NULL,
+  `Id_Email` INT NOT NULL,
+  `Id_News` INT NOT NULL,
   PRIMARY KEY (`Id_User`),
-  INDEX `fk_Tbl_User_Tbl_Email1_idx` (`Tbl_Email_Id_Email` ASC),
-  INDEX `fk_Tbl_User_Tbl_News1_idx` (`Tbl_News_Id_News` ASC),
+  INDEX `fk_Tbl_User_Tbl_Email1_idx` (`Id_Email` ASC),
+  INDEX `fk_Tbl_User_Tbl_News1_idx` (`Id_News` ASC),
   CONSTRAINT `fk_Tbl_User_Tbl_Email1`
-    FOREIGN KEY (`Tbl_Email_Id_Email`)
+    FOREIGN KEY (`Id_Email`)
     REFERENCES `Classe2B`.`Tbl_Email` (`Id_Email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tbl_User_Tbl_News1`
-    FOREIGN KEY (`Tbl_News_Id_News`)
+    FOREIGN KEY (`Id_News`)
     REFERENCES `Classe2B`.`Tbl_News` (`Id_News`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -99,11 +99,11 @@ CREATE TABLE IF NOT EXISTS `Classe2B`.`Tbl_Group` (
   `Id_Group` INT NOT NULL AUTO_INCREMENT,
   `Nm_Group` VARCHAR(45) NOT NULL,
   `Txt_Image_Group` VARCHAR(45) NOT NULL,
-  `Tbl_Project_Id_Project` INT NOT NULL,
+  `Id_Project` INT NOT NULL,
   PRIMARY KEY (`Id_Group`),
-  INDEX `fk_Tbl_Group_Tbl_Project1_idx` (`Tbl_Project_Id_Project` ASC),
+  INDEX `fk_Tbl_Group_Tbl_Project1_idx` (`Id_Project` ASC),
   CONSTRAINT `fk_Tbl_Group_Tbl_Project1`
-    FOREIGN KEY (`Tbl_Project_Id_Project`)
+    FOREIGN KEY (`Id_Project`)
     REFERENCES `Classe2B`.`Tbl_Project` (`Id_Project`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -130,11 +130,11 @@ DROP TABLE IF EXISTS `Classe2B`.`Tbl_Comment` ;
 CREATE TABLE IF NOT EXISTS `Classe2B`.`Tbl_Comment` (
   `Id_Comment` INT NOT NULL AUTO_INCREMENT,
   `Txt_Content_Comment` VARCHAR(45) NOT NULL,
-  `Tbl_Project_Id_Project` INT NOT NULL,
+  `Id_Project` INT NOT NULL,
   PRIMARY KEY (`Id_Comment`),
-  INDEX `fk_Tbl_Comment_Tbl_Project1_idx` (`Tbl_Project_Id_Project` ASC),
+  INDEX `fk_Tbl_Comment_Tbl_Project1_idx` (`Id_Project` ASC),
   CONSTRAINT `fk_Tbl_Comment_Tbl_Project1`
-    FOREIGN KEY (`Tbl_Project_Id_Project`)
+    FOREIGN KEY (`Id_Project`)
     REFERENCES `Classe2B`.`Tbl_Project` (`Id_Project`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -147,17 +147,17 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Classe2B`.`Tbl_User_Group` ;
 
 CREATE TABLE IF NOT EXISTS `Classe2B`.`Tbl_User_Group` (
-  `Tbl_User_Id_User` INT NOT NULL,
-  `Tbl_Group_Id_Group` INT NOT NULL,
-  INDEX `fk_Tbl_User_Group_Tbl_User_idx` (`Tbl_User_Id_User` ASC),
-  INDEX `fk_Tbl_User_Group_Tbl_Group1_idx` (`Tbl_Group_Id_Group` ASC),
+  `Id_User` INT NOT NULL,
+  `Id_Group` INT NOT NULL,
+  INDEX `fk_Tbl_User_Group_Tbl_User_idx` (`Id_User` ASC),
+  INDEX `fk_Tbl_User_Group_Tbl_Group1_idx` (`Id_Group` ASC),
   CONSTRAINT `fk_Tbl_User_Group_Tbl_User`
-    FOREIGN KEY (`Tbl_User_Id_User`)
+    FOREIGN KEY (`Id_User`)
     REFERENCES `Classe2B`.`Tbl_User` (`Id_User`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tbl_User_Group_Tbl_Group1`
-    FOREIGN KEY (`Tbl_Group_Id_Group`)
+    FOREIGN KEY (`Id_Group`)
     REFERENCES `Classe2B`.`Tbl_Group` (`Id_Group`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -170,17 +170,17 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Classe2B`.`Tbl_User_Role` ;
 
 CREATE TABLE IF NOT EXISTS `Classe2B`.`Tbl_User_Role` (
-  `Tbl_User_Id_User` INT NOT NULL,
-  `Tbl_Role_Id_Role` INT NOT NULL,
-  INDEX `fk_Tbl_User_Role_Tbl_User1_idx` (`Tbl_User_Id_User` ASC),
-  INDEX `fk_Tbl_User_Role_Tbl_Role1_idx` (`Tbl_Role_Id_Role` ASC),
+  `Id_User` INT NOT NULL,
+  `Id_Role` INT NOT NULL,
+  INDEX `fk_Tbl_User_Role_Tbl_User1_idx` (`Id_User` ASC),
+  INDEX `fk_Tbl_User_Role_Tbl_Role1_idx` (`Id_Role` ASC),
   CONSTRAINT `fk_Tbl_User_Role_Tbl_User1`
-    FOREIGN KEY (`Tbl_User_Id_User`)
+    FOREIGN KEY (`Id_User`)
     REFERENCES `Classe2B`.`Tbl_User` (`Id_User`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tbl_User_Role_Tbl_Role1`
-    FOREIGN KEY (`Tbl_Role_Id_Role`)
+    FOREIGN KEY (`Id_Role`)
     REFERENCES `Classe2B`.`Tbl_Role` (`Id_Role`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
