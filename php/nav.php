@@ -1,4 +1,9 @@
-<?php require_once '../lib/security.php'; ?>
+<?php
+require_once '../lib/security.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="index.php">Classe 2b</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"

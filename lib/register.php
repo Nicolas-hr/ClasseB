@@ -1,7 +1,7 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+
+
+
 
 require_once "dbConnect.php";
 
@@ -53,8 +53,8 @@ if (filter_has_var(INPUT_POST, 'register')) {
     //Entrees par l'utilisateur
     $firstName = filter_input(INPUT_POST, 'firstNameR', FILTER_SANITIZE_EMAIL);
     $lastName = filter_input(INPUT_POST, 'lastNameR', FILTER_SANITIZE_STRING);
+    $username = filter_input(INPUT_POST, 'usernameR', FILTER_SANITIZE_STRING);
     $email = filter_input(INPUT_POST, 'emailR', FILTER_VALIDATE_EMAIL);
-    $username = filter_input(INPUT_POST, 'uidR', FILTER_SANITIZE_STRING);
     $pwd = filter_input(INPUT_POST, 'pwdR', FILTER_SANITIZE_STRING);
     $confirmPwd = filter_input(INPUT_POST, 'confirmPwdR', FILTER_SANITIZE_STRING);
 
@@ -83,14 +83,14 @@ if (filter_has_var(INPUT_POST, 'register')) {
     if (!$error) {
         if (emailVerify($email)) {
             addUser($firstName, $lastName, $username, $email, $username, $pwd);
-            header("Location:../login.php");
+            header("Location:google.com");
             exit;
         }
     }
 
 
 }
-header("Location:../register.php");
+header("Location:../php/registerForm.php");
 exit;
 
 //FONCTIONS-------------------------------------------------------------------------------------------------------------
@@ -119,7 +119,7 @@ function addUser($firstNameUser, $lastNameUser, $usernameUser, $emailUser, $pwdU
     $pwdHash = sha1($pwdSalt);
 
     //Ajout dans la table user
-    $userAddRequest = $db->prepare("INSERT INTO tbl_user(Nm_First, Nm_Last, Txt_Password_Hash, Txt_Password_Salt) VALUES (:firstname,:lastname,:username, :pwdhash, :pwdsalt )");
+    $userAddRequest = $db->prepare("INSERT INTO tbl_user(Nm_First, Nm_Last, Txt_Username, Txt_Password_Hash, Txt_Password_Salt) VALUES (:firstname,:lastname,:username, :pwdhash, :pwdsalt )");
     $userAddRequest->execute(array(":firstname" => $firstNameUser, ":lastname" => $lastNameUser, ":username" => $usernameUser, ":pwdhash" => $pwdHash, ":pwdsalt" => $salt));
 
     //Numero du dernier index de la table user
