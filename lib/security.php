@@ -24,3 +24,7 @@ function errorAddNews($titre, $description)
 {
   
 }
+
+function showNews(){
+	echo " les news";
+}
