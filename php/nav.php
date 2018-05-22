@@ -11,7 +11,9 @@
 
             $LINKS = array(
                 "index.php" => "Accueil",
-                "uploadsForm.php" => "Mise en ligne");
+                "uploadsForm.php" => "Mise en ligne",
+                "newsForm.php" => "Les news"
+              );
 
             foreach ($LINKS as $key => $value) {
                 if ($key == $currentPage) {
