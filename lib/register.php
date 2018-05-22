@@ -3,17 +3,15 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once "../lib/dbConnect.php";
+require_once "dbConnect.php";
 
 //VARIALES DANS LA SESSION
-if (!isset($_SESSION['firstNameReg'])) {
-    $_SESSION['firstNameReg'] = '';
-    $_SESSION['lastNameReg'] = '';
-    $_SESSION['emailReg'] = '';
+if (!isset($_SESSION['username'])) {
+    $_SESSION['username'] = '';
     $_SESSION['errorReg'] = [
         'firstName' => '',
         'lastName' => '',
-        'email' => '',
+        'username' => '',
         'password' => '',
     ];
 }
@@ -22,9 +20,10 @@ if (!isset($_SESSION['firstNameReg'])) {
 $firstName = "";
 $lastName = "";
 $email = "";
+$username = "";
 $pwd = "";
+$confirmPwd = "";
 $error = false;
-
 
 //Lors du click dans le bouton submit
 if (filter_has_var(INPUT_POST, 'register')) {
@@ -34,10 +33,12 @@ if (filter_has_var(INPUT_POST, 'register')) {
     $_SESSION['firstNameReg'] = '';
     $_SESSION['lastNameReg'] = '';
     $_SESSION['emailReg'] = '';
+    $_SESSION['username'] = '';
     $_SESSION['errorReg'] = [
-        'firstName' => '',
-        'lastName' => '',
+        'firstName' =>'',
+        'lastName' =>'',
         'email' => '',
+        'username'=>'',
         'password' => '',
     ];
 
@@ -47,32 +48,38 @@ if (filter_has_var(INPUT_POST, 'register')) {
     $firstName = filter_input(INPUT_POST, 'firstNameR', FILTER_SANITIZE_EMAIL);
     $lastName = filter_input(INPUT_POST, 'lastNameR', FILTER_SANITIZE_STRING);
     $email = filter_input(INPUT_POST, 'emailR', FILTER_VALIDATE_EMAIL);
+    $username = filter_input(INPUT_POST, 'uidR', FILTER_SANITIZE_STRING);
     $pwd = filter_input(INPUT_POST, 'pwdR', FILTER_SANITIZE_STRING);
+    $confirmPwd = filter_input(INPUT_POST, 'confirmPwdR', FILTER_SANITIZE_STRING);
 
 
     if (empty($firstName)) {
-        $_SESSION['errorReg']['firstName'] = "Le prénom rentré n'est pas valable";
+        $_SESSION['errorReg']['firstName'] = "Enter your first name";
         $error = true;
     }
     if (empty($lastName)) {
-        $_SESSION['errorReg']['lastNameReg'] = "Le prénom rentré n'est pas valable";
+        $_SESSION['errorReg']['lastName'] = "Enter your last name";
         $error = true;
     }
     if (empty($email)) {
-        $_SESSION['errorReg']['email'] = "L'email rentré n'est pas valable";
+        $_SESSION['errorReg']['email'] = "Enter a valid email format";
         $error = true;
     }
-    if (empty($pwd)) {
-        $_SESSION['errorReg']['password'] = "Le mot de passe rentré n'est pas valable";
+    if (empty($username)) {
+        $_SESSION['errorReg']['username'] = "Enter a username";
         $error = true;
     }
+    if (empty($pwd) OR empty($confirmPwd) OR $pwd!=$confirmPwd) {
+
+        $_SESSION['errorReg']['password'] = "The passwords don't match";
+        $error = true;
+    }
+
     if (!$error) {
-        if (emailVerify($email)) {
-            addUser($firstName, $lastName, $email, $pwd);
+        if (userVerify($username)) {
+            addUser($firstName, $lastName, $email, $username, $pwd);
             header("Location:../login.php");
             exit;
-        } else {
-            $_SESSION['errorReg'] = "L'email n'est pas valable.";
         }
     }
 
@@ -83,22 +90,22 @@ exit;
 
 //FONCTIONS-------------------------------------------------------------------------------------------------------------
 
-function emailVerify($emailVerify)
+function userVerify($usernameVerify)
 {
     $db = dbConnect();
 
-    $email_ok = false;
+    $username_ok = false;
 
-    $emailRequest = $db->prepare("SELECT Txt_Email 'email'  FROM tbl_email WHERE Txt_Email=:email");
-    $emailRequest->execute(array(":email" => $emailVerify));
+    $usernameRequest = $db->prepare("SELECT Txt_Username  FROM tbl_user WHERE Txt_Username=:username");
+    $usernameRequest->execute(array(":username" => $usernameVerify));
 
-    if ($emailRequest->rowCount() == 0) {
-        $email_ok = true;
+    if ($usernameRequest->rowCount() == 0) {
+        $username_ok = true;
     }
-    return $email_ok;
+    return $username_ok;
 }
 
-function addUser($firstNameUser, $lastNameUser, $emailUser, $pwdUser)
+function addUser($firstNameUser, $lastNameUser, $emailUser, $userName, $pwdUser)
 {
     $db = dbConnect();
 
@@ -107,15 +114,10 @@ function addUser($firstNameUser, $lastNameUser, $emailUser, $pwdUser)
     $pwdHash = sha1($pwdSalt);
 
     //Ajout dans la table user
-    $userAddRequest = $db->prepare("INSERT INTO tbl_user(Nm_First, Nm_Last, Txt_Password_Hash, Txt_Password_Salt) VALUES (:firstname,:lastname, :pwdhash, :pwdsalt )");
-    $userAddRequest->execute(array(":firstname" => $firstNameUser, ":lastname" => $lastNameUser, ":pwdhash" => $pwdHash, ":pwdsalt" => $salt));
+    $userAddRequest = $db->prepare("INSERT INTO tbl_user(Txt_Username, Nm_First, Nm_Last,Txt_Email,  Txt_Password_Hash, Txt_Password_Salt) VALUES (:username, :firstname,:lastname, :email, :pwdhash, :pwdsalt )");
+    $userAddRequest->execute(array(":username" => $userName, ":firstname" => $firstNameUser, ":lastname" => $lastNameUser, ":email" => $emailUser, ":pwdhash" => $pwdHash, ":pwdsalt" => $salt));
 
-    //Numero du dernier index de la table user
-    $lastIndex = $db->lastInsertId();
 
-    //Ajout dans la table email
-    $userAddRequest = $db->prepare("INSERT INTO tbl_email(Txt_Email,Id_User) VALUES (:email,:lastUserId )");
-    $userAddRequest->execute(array(":email" => $emailUser, ":lastUserId" => $lastIndex));
 }
 
 
