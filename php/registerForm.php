@@ -20,7 +20,7 @@
 <?php require_once 'nav.php'; ?>
 
 <main class="container">
-    <form class="form-signin">
+    <form class="form-signin" action="../lib/register.php" method="post">
         <div id="headerForm" class="text-center">
             <img class="mb-4 rounded" src="../images/php.jpg" alt="" width="72" height="72">
 
