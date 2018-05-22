@@ -16,33 +16,33 @@ if (session_status() == PHP_SESSION_NONE) {
             <?php
             $currentPage = basename($_SERVER['PHP_SELF']);
 
-            $LINKS = array(
-                "index.php" => "Accueil",
-                "uploadsForm.php" => "Mise en ligne",
-                "registerForm.php" => "Inscription",
-                "loginForm.php" => "Connexion",
-                "showNews.php" => "Les news",
-                "profil.php" => "Profil",
-            );
+            if (isLogged()) {
+                $LINKS = array(
+                    "index.php" => "Accueil",
+                    "uploadsForm.php" => "Mise en ligne",
+                    "showNews.php" => "Les news",
+                    "profil.php" => "Profil",
+                    "../lib/logout.php" =>"Logout",
+                );
+            } elseif (!isLogged()) {
+                $LINKS = array(
+                    "index.php" => "Accueil",
+                    "registerForm.php" => "Inscription",
+                    "loginForm.php" => "Connexion",
+                    "showNews.php" => "Les news",
+                );
+            }
+
 
             foreach ($LINKS as $key => $value) {
-                if (isLogged()) {
-                    if ($key != "registerForm.php" && $key != "loginForm.php") {
-                        if ($key == $currentPage) {
-                            echo "<li class='nav-item active'><a class='nav-link' href='" . $key . "' >" . $value . "</a></li>";
-                        } else {
-                            echo "<li><a class='nav-link' href='" . $key . "'>" . $value . "</a></li>";
-                        }
-                    }
+
+                if ($key == $currentPage) {
+                    echo "<li class=\"nav-item active\"><a class=\"nav-link\" href=\"" . $key . " \"> " . $value . "</a></li>";
                 } else {
-                    if ($key != "uploadsForm.php" && $key != "profil.php") {
-                        if ($key == $currentPage) {
-                            echo "<li class='nav-item active'><a class='nav-link' href='" . $key . "' >" . $value . "</a></li>";
-                        } else {
-                            echo "<li><a class='nav-link' href='" . $key . "'>" . $value . "</a></li>";
-                        }
-                    }
+                    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"" . $key . " \"> " . $value . "</a></li>";
                 }
+
+
             }
             ?>
         </ul>

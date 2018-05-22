@@ -1,8 +1,4 @@
 <?php
-
-
-
-
 require_once "dbConnect.php";
 
 //VARIALES DANS LA SESSION
@@ -82,8 +78,8 @@ if (filter_has_var(INPUT_POST, 'register')) {
 
     if (!$error) {
         if (emailVerify($email)) {
-            addUser($firstName, $lastName, $username, $email, $username, $pwd);
-            header("Location:google.com");
+            addUser($firstName, $lastName, $username, $email, $pwd);
+            header("Location: ../php/loginForm.php");
             exit;
         }
     }

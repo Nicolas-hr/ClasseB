@@ -1,7 +1,9 @@
 <?php
-function isLogged() {
-    return isset($_SESSION['logged']) && $_SESSION['logged'] == "connected";
-//    return true;
+function isLogged()
+{
+    if (array_key_exists('logged', $_SESSION)) {
+        return $_SESSION['logged'];
+    }
 }
 
 function addNews($titre, $description){
