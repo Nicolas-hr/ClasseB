@@ -1,6 +1,10 @@
 <?php
 require_once "dbConnect.php";
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Initialiser tous les champs de la session lors de la 1ère ouverture
 //VARIALES DANS LA SESSION
 if (!isset($_SESSION['logged'])) {
@@ -40,8 +44,6 @@ if (filter_has_var(INPUT_POST, 'login')) {
 
         echo "lol";
         if (pwdVerify($email, $pwd)) {
-            echo "dab";
-            $_SESSION['email'] = $email;
 
             $_SESSION['logged'] = TRUE;
 
@@ -87,9 +89,9 @@ WHERE e.Txt_Email=? ');
     $pwdRequest->execute(array($emailVerify));
     $pwdRequestResult = $pwdRequest->fetch();
 
-    $pwdHash =  sha1($pwdVerify . $pwdRequestResult['salt']);
+    $pwdHash = sha1($pwdVerify . $pwdRequestResult['salt']);
 
-    if ( $pwdHash== $pwdRequestResult['pwdHash']) {
+    if ($pwdHash == $pwdRequestResult['pwdHash']) {
         $password_ok = true;
     }
 
