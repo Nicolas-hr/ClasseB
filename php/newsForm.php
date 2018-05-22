@@ -18,6 +18,7 @@ require_once 'newsForm.php';
   <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
+  <!-- Navabar -->
   <?php include 'nav.php'; ?>
   <form action="news.php" method="post">
     <table>
@@ -40,6 +41,7 @@ require_once 'newsForm.php';
     </table>
     <input type="submit" name="addAnnonce" value="Ajouter une annonce">
   </form>
+  <!-- Footer -->
   <?php include 'footer.php'; ?>
 
   <!-- Optional JavaScript -->
