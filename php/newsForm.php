@@ -5,6 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 require_once '../lib/security.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
