@@ -27,17 +27,17 @@
             <h1 class="h3 font-weight-normal">Inscription</h1>
         </div>
 
-        <input type="text" id="first" name="first" class="form-control first" placeholder="Prénom" required autofocus>
+        <input type="text" id="first" name="firstNameR" class="form-control first" placeholder="Prénom" required autofocus>
 
-        <input type="text" id="last" name="last" class="form-control" placeholder="Nom" required>
+        <input type="text" id="last" name="lastNameR" class="form-control" placeholder="Nom" required>
 
-        <input type="text" id="username" name="username" class="form-control" placeholder="Pseudo" required>
+        <input type="text" id="username" name="usernameR" class="form-control" placeholder="Pseudo" required>
 
-        <input type="email" id="email" name="email" class="form-control" placeholder="Adresse email" required>
+        <input type="email" id="email" name="emailR" class="form-control" placeholder="Adresse email" required>
 
-        <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Mot de passe" required>
+        <input type="password" id="pwd" name="pwdR" class="form-control" placeholder="Mot de passe" required>
 
-        <input type="password" id="pwdConfirme" name="pwdConfirme" class="form-control last" placeholder="Confirmer votre mot de passe" required>
+        <input type="password" id="pwdConfirme" name="confirmPwdR" class="form-control last" placeholder="Confirmer votre mot de passe" required>
 
         <div class="checkbox mb-3 mt-3 text-center">
             <label>
@@ -46,6 +46,26 @@
         </div>
 
         <input class="btn btn-lg btn-primary btn-block" type="submit" value="Inscription" name="register">
+
+        <?php {
+
+
+            if (isset($_SESSION['errorReg'])) {
+                foreach ($_SESSION['errorReg'] as $value) {
+                    if ($value != "") {
+                        echo "<div class='mt-2 alert alert-danger' role='alert' >" . $value . "</div>";
+                    }
+                }
+            }
+        }
+        $_SESSION['errorReg'] = [
+            'firstName' =>'',
+            'lastName' =>'',
+            'username'=>'',
+            'email' => '',
+            'password' => '',
+        ];
+        ?>
         <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
     </form>
 </main>
