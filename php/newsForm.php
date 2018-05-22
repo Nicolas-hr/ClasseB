@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 
-require_once 'newsForm.php';
+require_once '../lib/security.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +20,8 @@ require_once 'newsForm.php';
 <body>
   <!-- Navabar -->
   <?php include 'nav.php'; ?>
-  <form action="news.php" method="post">
+  
+  <form action="../lib/news.php" method="post">
     <table>
       <tr>
         <td>
