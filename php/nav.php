@@ -21,7 +21,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 "uploadsForm.php" => "Mise en ligne",
                 "registerForm.php" => "Inscription",
                 "loginForm.php" => "Connexion",
-                "newsForm.php" => "Ajouter des news",
+                "showNews.php" => "Les news",
                 "profil.php" => "Profil",
             );
 

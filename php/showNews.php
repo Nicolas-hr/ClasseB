@@ -1,8 +1,4 @@
-<?php
-if (session_status() == PHP_SESSION_NONE) {
-  session_start();
-}
-
+<?php 
 require_once '../lib/security.php';
 ?>
 
@@ -22,25 +18,9 @@ require_once '../lib/security.php';
   <!-- Navabar -->
   <?php include 'nav.php'; ?>
   
-  <form action="../lib/news.php" method="post">
-    <table>
-      <tr>
-        <td>
-          <label for="titre">Titre: </label>
-        </td>
-        <td>
-          <input type="text" name="titre" id="titre" value="<?php echo (isset($titre) ? $titre : "")?>">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label for="description">Description: </label>
-        </td>
-        <td>
-          <input type="text" name="description" id="description" value="<?php echo (isset($description) ? $description : "")?>">
-        </td>
-      </tr>
-    </table>
+  <?php showNews(); ?>
+  
+  <form action="newsForm.php" method="post">
     <input type="submit" name="addAnnonce" value="Ajouter une annonce">
   </form>
   <!-- Footer -->
