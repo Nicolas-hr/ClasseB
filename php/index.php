@@ -1,4 +1,11 @@
 <?php
+/*****************************************************************************
+* Auteur: Cavagna Tanguy, Günner Adar, Oliveira Francisco, Hoarau Nicolas    *                                                 *
+* Description : Ce site est un site oú l'on peut upload nos projet WEB, voir *
+*               les news du site.                                            *
+* Date de création : 08.05.2018                                              *
+******************************************************************************/
+
 require_once './projects.php';
 ?>
 <!doctype html>
