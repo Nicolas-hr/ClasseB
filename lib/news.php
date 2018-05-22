@@ -1,5 +1,5 @@
 <?php
-function addNews()
+function addNews($titre, $description)
 {
   try {
     $db = new PDO('mysql:host=127.0.0.1;dbname=classe2b;charset=utf8mb4', 'root');
@@ -15,8 +15,8 @@ function addNews()
     'description' => $description
     ));}
 
-function errorAddNews()
+function errorAddNews($titre, $description)
 {
-  // code...
+  
 }
  ?>
