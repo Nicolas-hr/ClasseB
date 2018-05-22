@@ -6,13 +6,19 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once "dbConnect.php";
 
 //VARIALES DANS LA SESSION
-if (!isset($_SESSION['username'])) {
-    $_SESSION['username'] = '';
+if (!isset($_SESSION['firstNameReg'])) {
+    $_SESSION['firstNameReg'] = '';
+    $_SESSION['lastNameReg'] = '';
+    $_SESSION['emailReg'] = '';
+    $_SESSION['usernameReg'] = '';
+
+    //Erreurs en session
     $_SESSION['errorReg'] = [
         'firstName' => '',
         'lastName' => '',
+        'email' => '',
         'username' => '',
-        'password' => '',
+
     ];
 }
 
@@ -35,10 +41,10 @@ if (filter_has_var(INPUT_POST, 'register')) {
     $_SESSION['emailReg'] = '';
     $_SESSION['username'] = '';
     $_SESSION['errorReg'] = [
-        'firstName' =>'',
-        'lastName' =>'',
+        'firstName' => '',
+        'lastName' => '',
+        'username' => '',
         'email' => '',
-        'username'=>'',
         'password' => '',
     ];
 
@@ -54,30 +60,29 @@ if (filter_has_var(INPUT_POST, 'register')) {
 
 
     if (empty($firstName)) {
-        $_SESSION['errorReg']['firstName'] = "Enter your first name";
+        $_SESSION['errorReg']['firstName'] = "Veuillez entrer votre prénom";
         $error = true;
     }
     if (empty($lastName)) {
-        $_SESSION['errorReg']['lastName'] = "Enter your last name";
+        $_SESSION['errorReg']['lastName'] = "Veuillez entrer votre prénom";
         $error = true;
     }
     if (empty($email)) {
-        $_SESSION['errorReg']['email'] = "Enter a valid email format";
+        $_SESSION['errorReg']['email'] = "Veuillez entrer un email valide";
         $error = true;
     }
     if (empty($username)) {
-        $_SESSION['errorReg']['username'] = "Enter a username";
+        $_SESSION['errorReg']['username'] = "Veuillez entrer un nom d'utilisateur";
         $error = true;
     }
-    if (empty($pwd) OR empty($confirmPwd) OR $pwd!=$confirmPwd) {
-
+    if (empty($pwd) OR empty($confirmPwd) OR $pwd != $confirmPwd) {
         $_SESSION['errorReg']['password'] = "The passwords don't match";
         $error = true;
     }
 
     if (!$error) {
-        if (userVerify($username)) {
-            addUser($firstName, $lastName, $email, $username, $pwd);
+        if (emailVerify($email)) {
+            addUser($firstName, $lastName, $username, $email, $username, $pwd);
             header("Location:../login.php");
             exit;
         }
@@ -90,22 +95,22 @@ exit;
 
 //FONCTIONS-------------------------------------------------------------------------------------------------------------
 
-function userVerify($usernameVerify)
+function emailVerify($emailVerify)
 {
     $db = dbConnect();
 
-    $username_ok = false;
+    $email_ok = false;
 
-    $usernameRequest = $db->prepare("SELECT Txt_Username  FROM tbl_user WHERE Txt_Username=:username");
-    $usernameRequest->execute(array(":username" => $usernameVerify));
+    $emailRequest = $db->prepare("SELECT Txt_Email 'email'  FROM tbl_email WHERE Txt_Email=:email");
+    $emailRequest->execute(array(":email" => $emailVerify));
 
-    if ($usernameRequest->rowCount() == 0) {
-        $username_ok = true;
+    if ($emailRequest->rowCount() == 0) {
+        $email_ok = true;
     }
-    return $username_ok;
+    return $email_ok;
 }
 
-function addUser($firstNameUser, $lastNameUser, $emailUser, $userName, $pwdUser)
+function addUser($firstNameUser, $lastNameUser, $usernameUser, $emailUser, $pwdUser)
 {
     $db = dbConnect();
 
@@ -114,10 +119,15 @@ function addUser($firstNameUser, $lastNameUser, $emailUser, $userName, $pwdUser)
     $pwdHash = sha1($pwdSalt);
 
     //Ajout dans la table user
-    $userAddRequest = $db->prepare("INSERT INTO tbl_user(Txt_Username, Nm_First, Nm_Last,Txt_Email,  Txt_Password_Hash, Txt_Password_Salt) VALUES (:username, :firstname,:lastname, :email, :pwdhash, :pwdsalt )");
-    $userAddRequest->execute(array(":username" => $userName, ":firstname" => $firstNameUser, ":lastname" => $lastNameUser, ":email" => $emailUser, ":pwdhash" => $pwdHash, ":pwdsalt" => $salt));
+    $userAddRequest = $db->prepare("INSERT INTO tbl_user(Nm_First, Nm_Last, Txt_Password_Hash, Txt_Password_Salt) VALUES (:firstname,:lastname,:username, :pwdhash, :pwdsalt )");
+    $userAddRequest->execute(array(":firstname" => $firstNameUser, ":lastname" => $lastNameUser, ":username" => $usernameUser, ":pwdhash" => $pwdHash, ":pwdsalt" => $salt));
 
+    //Numero du dernier index de la table user
+    $lastIndex = $db->lastInsertId();
 
+    //Ajout dans la table email
+    $userAddRequest = $db->prepare("INSERT INTO tbl_email(Txt_Email,Id_User) VALUES (:email,:lastUserId )");
+    $userAddRequest->execute(array(":email" => $emailUser, ":lastUserId" => $lastIndex));
 }
 
 
