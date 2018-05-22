@@ -16,7 +16,7 @@
                 "uploadsForm.php" => "Mise en ligne",
                 "registerForm.php" => "Inscription",
                 "loginForm.php" => "Connexion",
-                "newsForm.php" => "Les news",
+                "showNews.php" => "Les news",
                 "profil.php" => "Profil",
             );
 
