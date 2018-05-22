@@ -11,7 +11,7 @@ function addNews($titre, $description){
     die("erreur : ". $e->getMessage());
   }
 
-  $req = $db->prepare('INSERT INTO tbl_user(Nm_News, Txt_Contents_News) VALUES(:titre, :description)');
+  $req = $db->prepare('INSERT INTO tbl_news(Nm_News, Txt_Contents_News) VALUES(:titre, :description)');
   $salt = uniqid();
 
   $req->execute(array(
