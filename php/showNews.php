@@ -1,3 +1,7 @@
+<?php 
+require_once '../lib/security.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +17,8 @@
 <body>
   <!-- Navabar -->
   <?php include 'nav.php'; ?>
+  
+  <?php showNews(); ?>
   
   <form action="newsForm.php" method="post">
     <input type="submit" name="addAnnonce" value="Ajouter une annonce">
