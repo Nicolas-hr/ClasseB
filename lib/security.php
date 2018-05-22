@@ -1,4 +1,5 @@
 <?php
 function isLogged() {
-    return true;
+    return isset($_SESSION['logged']) && $_SESSION['logged'] == "connected";
+//    return true;
 }

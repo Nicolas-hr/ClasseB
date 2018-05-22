@@ -13,7 +13,7 @@
     <!-- Custom styles for this template -->
     <link href="../css/register.css" rel="stylesheet">
 
-    <title>Document</title>
+    <title>Register</title>
 </head>
 <body>
 

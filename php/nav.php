@@ -15,21 +15,27 @@
                 "index.php" => "Accueil",
                 "uploadsForm.php" => "Mise en ligne",
                 "registerForm.php" => "Inscription",
-                "newsForm.php" => "Les news"
+                "loginForm.php" => "Connexion",
+                "newsForm.php" => "Les news",
+                "profil.php" => "Profil",
             );
 
             foreach ($LINKS as $key => $value) {
                 if (isLogged()) {
-                    if ($key == $currentPage && !strpos("register", $key) && !strpos("login", $key)) {
-                        echo "<li class='nav-item active'><a class='nav-link' href='" . $key . "' >" . $value . "</a></li>";
-                    } else {
-                        echo "<li><a class='nav-link' href='" . $key . "'>" . $value . "</a></li>";
+                    if ($key != "registerForm.php" && $key != "loginForm.php") {
+                        if ($key == $currentPage) {
+                            echo "<li class='nav-item active'><a class='nav-link' href='" . $key . "' >" . $value . "</a></li>";
+                        } else {
+                            echo "<li><a class='nav-link' href='" . $key . "'>" . $value . "</a></li>";
+                        }
                     }
                 } else {
-                    if ($key == $currentPage) {
-                        echo "<li class='nav-item active'><a class='nav-link' href='" . $key . "' >" . $value . "</a></li>";
-                    } else {
-                        echo "<li><a class='nav-link' href='" . $key . "'>" . $value . "</a></li>";
+                    if ($key != "uploadsForm.php" && $key != "profil.php") {
+                        if ($key == $currentPage) {
+                            echo "<li class='nav-item active'><a class='nav-link' href='" . $key . "' >" . $value . "</a></li>";
+                        } else {
+                            echo "<li><a class='nav-link' href='" . $key . "'>" . $value . "</a></li>";
+                        }
                     }
                 }
             }
