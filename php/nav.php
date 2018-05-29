@@ -21,7 +21,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     "index.php" => "Accueil",
                     "uploadsForm.php" => "Mise en ligne",
                     "showNews.php" => "Les news",
-                    "profil.php" => "Profil",
+                    "profil.php?action=infos" => "Profil",
                     "../lib/logout.php" =>"Logout",
                 );
             } elseif (!isLogged()) {

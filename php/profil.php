@@ -17,7 +17,23 @@
 <?php require_once 'nav.php'; ?>
 
 <div class="container">
+    <div class="row mt-5">
+        <!--  Left side  -->
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <img src="../images/blank-profile-picture.png" class="rounded-circle w-100" alt="Image de profil">
 
+            <!--  Links  -->
+            <div id="link" class="mt-3">
+                <a href="./profil.php?action=infos" class="d-block text-center mt-2">Infos</a>
+                <a href="./profil.php?action=confidentialite" class="d-block text-center mt-2">Confidentialité</a>
+            </div>
+        </div>
+
+        <!--  Right side  -->
+        <div class="col-sm-10 col-md-10 col-lg-10 border-left">
+
+        </div>
+    </div>
 </div>
 
 <!-- Optional JavaScript -->
