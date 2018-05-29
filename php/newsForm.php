@@ -29,7 +29,7 @@ require_once '../lib/security.php';
           <label for="titre">Titre: </label>
         </td>
         <td>
-          <input type="text" name="titre" id="titre" value="<?php echo (isset($titre) ? $titre : "")?>">
+          <input type="text" name="titre" id="titre">
         </td>
       </tr>
       <tr>
@@ -37,7 +37,7 @@ require_once '../lib/security.php';
           <label for="description">Description: </label>
         </td>
         <td>
-          <input type="text" name="description" id="description" value="<?php echo (isset($description) ? $description : "")?>">
+          <input type="text" name="description" id="description">
         </td>
       </tr>
     </table>
@@ -45,8 +45,8 @@ require_once '../lib/security.php';
   </form>
   <div class="error">
     <?php
-    if (filter_input(INPUT_GET, 'error')) {
-		switch (filter_input(INPUT_GET, 'error')){
+    if (filter_input(INPUT_GET, 'errorNews')) {
+		switch (filter_input(INPUT_GET, 'errorNews')){
 			case 2:
             echo '<div class="p-3 mb-2 bg-danger text-white">';
             echo '<p class="mb-0">Veuillez choisir un titre à votre annonce.</p>';
@@ -56,9 +56,19 @@ require_once '../lib/security.php';
             echo '<div class="p-3 mb-2 bg-danger text-white">';
             echo '<p class="mb-0">Veuillez mettre une description à votre annonce.</p>';
             break;
+
+			case 4:
+            echo '<div class="p-3 mb-2 bg-danger text-white">';
+            echo '<p class="mb-0">Votre titre doit faire 2 carctères au minimum.</p>';
+            break;
+
+			case 5:
+            echo '<div class="p-3 mb-2 bg-danger text-white">';
+            echo '<p class="mb-0">Votre description doit faire 5 carctères au minimum.</p>';
+            break;
 		}
 	}
-  
+  ?>
   </div>
   <!-- Footer -->
   <?php include 'footer.php'; ?>
