@@ -25,35 +25,51 @@ function addNews($titre, $description){
     'titre' => $titre,
     'description' => $description
     ));
-}
+	
+  header('Location: ../php/showNews.php');
+  exit;
+ }
 
-function errorAddNews($titre, $description, $message)
-{
-  if(strlen($titre) < 2 ){
-	  $message = "titre trop court";
-  }elseif(empty($titre)){
-  $message = "Il faut un titre";
-  }
+function errorAddNews($titre, $description, $message){
+  define("SUCCESS", 1);
+  define("EMPTY_TITLE", 2);
+  define("EMPTY_DESCRIPTION", 3);
+  define("TITLE_TOO_SHORT",4);
+  define("DESCRIPTION_TOO_SHORT",5);
   
-  if(strlen($description) < 5){
-	  $message = "Description trop courte";
-  }elseif(empty($description)){
-	  $message = "Vous devez mettre une description";
-  }
-  
-  if($message == ""){
-	  addNews();
+  if(!empty($titre)){
+	  if(!empty($description)){
+		  if(strlen($titre) >= 2){
+			  if(strlen($description) >= 5){
+				// Les champs ont bien été remplis
+			  } else{
+				  $errorNews = DESCRIPTION_TOO_SHORT;
+			  }
+		  } else{
+			  $errorNews = TITLE_TOO_SHORT;
+		  }
+	  } else{
+		  $errorNews = EMPTY_DESCRIPTION;
+	  }
   } else{
-    include '../php/newsForm.php';
+	$errorNews = EMPTY_TITLE;
   }
-}
+  
+  if (!isset($errorFile)) {
+      header("Location: ../php/showNews.php?error=" . SUCCESS);
+      exit;
+  } else {
+      header("Location: ../php/newsForm.php?error=" . $errorFile);
+      exit;
+  }
+ }
 
 function showNews(){
 	echo "Les news :";
 	echo "<br>";
-    $db = new PDO('mysql:host=127.0.0.1;dbname=classe2b; charset=utf8mb4', 'root');
-	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+	
+	dbConnect();
+	
 	echo "<table id='news'>";
 	echo "<tr> <th>Titre</th> <th>Description</th>";
 	try {

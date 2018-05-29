@@ -43,6 +43,23 @@ require_once '../lib/security.php';
     </table>
     <input type="submit" name="addAnnonce" value="Ajouter une annonce">
   </form>
+  <div class="error">
+    <?php
+    if (filter_input(INPUT_GET, 'error')) {
+		switch (filter_input(INPUT_GET, 'error')){
+			case 2:
+            echo '<div class="p-3 mb-2 bg-danger text-white">';
+            echo '<p class="mb-0">Veuillez choisir un titre à votre annonce.</p>';
+            break;
+			
+			case 3:
+            echo '<div class="p-3 mb-2 bg-danger text-white">';
+            echo '<p class="mb-0">Veuillez mettre une description à votre annonce.</p>';
+            break;
+		}
+	}
+  
+  </div>
   <!-- Footer -->
   <?php include 'footer.php'; ?>
 
