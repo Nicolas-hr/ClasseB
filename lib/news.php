@@ -1,46 +1,42 @@
 <?php
 require_once 'dbConnect.php';
-
-$titre = filter_input( INPUT_POST, 'titre', FILTER_SANITIZE_STRING);
-$description = filter_input( INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-
-$message = "";
-/*
-if (!$titre || !$description || strlen($titre) < 2 || strlen($description) < 5 ) {
-  errorAddNews($titre, $description, $message);
-  include '../php/newsForm.php';
-}else {
-  addNews($titre, $description);
-  header('Location: ../php/showNews.php');
-  exit;
-}
-*/
+require_once 'userId.php';
 
 function addNews($titre, $description){
-  dbConnect();
+  $userId = getUserId();
+  $db = dbConnect();
 
-  $req = $db->prepare('INSERT INTO tbl_news(Nm_New, Txt_Content_News) VALUES(:titre, :description)');
+  $req = $db->prepare('INSERT INTO tbl_news(Nm_New, Txt_Content_News, Id_User) VALUES(:titre, :description, :userId)');
 
   $req->execute(array(
     'titre' => $titre,
-    'description' => $description
+    'description' => $description,
+	'userId' => $userId
     ));
 	
   header('Location: ../php/showNews.php');
   exit;
  }
 
-function errorAddNews($titre, $description, $message){
+function errorAddNews(){
   define("SUCCESS", 1);
   define("EMPTY_TITLE", 2);
   define("EMPTY_DESCRIPTION", 3);
   define("TITLE_TOO_SHORT",4);
   define("DESCRIPTION_TOO_SHORT",5);
   
-  if(!empty($titre)){
-	  if(!empty($description)){
+  $errorNews = -1;
+  $titre = filter_input( INPUT_POST, 'titre', FILTER_SANITIZE_STRING, FILTER_NULL_ON_FAILURE);
+  $description = filter_input( INPUT_POST, 'description', FILTER_SANITIZE_STRING, FILTER_NULL_ON_FAILURE);
+  
+  if($titre != null){
+	  // Du texte à été mis dans le champs titre
+	  if($description != null){
+		// Du texte à été mis dans le champs description		  
 		  if(strlen($titre) >= 2){
+			  // Le titre fais 2 caractère au minimum
 			  if(strlen($description) >= 5){
+				// La description fait 5 caractères minimum
 				// Les champs ont bien été remplis
 			  } else{
 				  $errorNews = DESCRIPTION_TOO_SHORT;
@@ -55,11 +51,10 @@ function errorAddNews($titre, $description, $message){
 	$errorNews = EMPTY_TITLE;
   }
   
-  if (!isset($errorFile)) {
-      header("Location: ../php/showNews.php?error=" . SUCCESS);
-      exit;
+  if ($errorNews == -1) {
+	  addNews($titre, $description);
   } else {
-      header("Location: ../php/newsForm.php?error=" . $errorFile);
+      header("Location: ../php/newsForm.php?errorNews=" . $errorNews);
       exit;
   }
  }
@@ -68,7 +63,7 @@ function showNews(){
 	echo "Les news :";
 	echo "<br>";
 	
-	dbConnect();
+	$db = dbConnect();
 	
 	echo "<table id='news'>";
 	echo "<tr> <th>Titre</th> <th>Description</th>";
@@ -84,6 +79,6 @@ function showNews(){
 	echo "</table>";
 }
 
-if (filter_input(INPUT_POST, 'submit')) {
+if (filter_input(INPUT_POST, 'addAnnonce')) {
     errorAddNews();
 }
