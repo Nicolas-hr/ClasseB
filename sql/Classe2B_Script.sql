@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `Classe2B`.`Tbl_User` (
   `Txt_Username` VARCHAR(45) NOT NULL,
   `Txt_Password_Hash` VARCHAR(45) NOT NULL,
   `Txt_Password_Salt` VARCHAR(45) NOT NULL,
-  `Txt_Image_Profil` VARCHAR(45) NULL,
+  `Txt_Image_Profil` VARCHAR(45) NULL DEFAULT 'blank-profile-picture.png',
   `Txt_Description_Profil` VARCHAR(255) NULL,
   PRIMARY KEY (`Id_User`))
 ENGINE = InnoDB;
