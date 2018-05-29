@@ -75,20 +75,23 @@ $infosPerso = $infosPerso->fetch();
                     </p>
                 <?php } ?>
             <?php elseif ($actions === "confidentialite"): ?>
-                <form action="../lib/updateProfil.php" method="post">
+                <form action="../lib/updateProfil.php" method="post" enctype="multipart/form-data" >
                     <div class="form-group">
                         <label for="first">Prénom</label>
-                        <input type="text" class="form-control" name="first" id="first" value="<?php echo $infosPerso['Nm_First']; ?>">
+                        <input type="text" class="form-control" name="first" id="first"
+                               value="<?php echo $infosPerso['Nm_First']; ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="last">Nom</label>
-                        <input type="text" class="form-control" name="last" id="last" value="<?php echo $infosPerso['Nm_Last']; ?>">
+                        <input type="text" class="form-control" name="last" id="last"
+                               value="<?php echo $infosPerso['Nm_Last']; ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" id="email" value="<?php echo $infosPerso['Txt_Email']; ?>">
+                        <input type="email" class="form-control" name="email" id="email"
+                               value="<?php echo $infosPerso['Txt_Email']; ?>">
                     </div>
 
                     <div class="form-group">
@@ -99,6 +102,13 @@ $infosPerso = $infosPerso->fetch();
                     <div class="form-group">
                         <label for="mdpConfirm">Confirmer votre mot de passe</label>
                         <input type="password" class="form-control" name="mdpConfirm" id="mdpConfirm">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <input type="file" name="fileToUpload" class="" id="fileToUpload">
+                            <label class="custom-file-label" for="fileToUpload">Choisir une image</label>
+                        </div>
                     </div>
 
                     <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
