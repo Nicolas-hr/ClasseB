@@ -71,10 +71,10 @@ function uploadProject()
     }
 
     if (!isset($errorFile)) {
-        header("Location: uploadsForm.php?error=" . SUCCESS);
+        header("Location: ../php/uploadsForm.php?error=" . SUCCESS);
         exit;
     } else {
-        header("Location: uploadsForm.php?error=" . $errorFile);
+        header("Location: ../php/uploadsForm.php?error=" . $errorFile);
         exit;
     }
 }
