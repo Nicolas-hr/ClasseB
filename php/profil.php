@@ -1,4 +1,34 @@
-<?php ?>
+<?php
+require_once '../lib/security.php';
+require_once '../lib/dbConnect.php';
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+$actions = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING, FILTER_NULL_ON_FAILURE);
+
+if ($actions == null) {
+    header('Location: ./profil.php?action=infos');
+    exit;
+}
+
+if (!isLogged()) {
+    header('Location: ./index.php');
+    exit;
+}
+
+$bdd = dbConnect();
+
+$infosPerso = $bdd->prepare("SELECT * 
+                             FROM Tbl_User
+                             JOIN Tbl_Email ON Tbl_Email.Id_User = Tbl_User.Id_User
+                             WHERE Tbl_User.Id_User = :id");
+
+$infosPerso->execute(array(':id' => $_SESSION['id']));
+
+$infosPerso = $infosPerso->fetch();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,6 +44,7 @@
     <title>Profil</title>
 </head>
 <body>
+
 <?php require_once 'nav.php'; ?>
 
 <div class="container">
@@ -32,6 +63,18 @@
         <!--  Right side  -->
         <div class="col-sm-10 col-md-10 col-lg-10 border-left">
 
+            <!--  Obligé de faire ce décalage dégueux pour pas faire d'erreur  -->
+            <?php if ($actions === "infos") : ?>
+                <p>
+                    <?php echo $infosPerso['Txt_Description_Profil']; ?>
+                </p>
+            <?php elseif ($actions === "confidentialite"): ?>
+                <p>
+                    <?php echo $infosPerso['Nm_First']; ?>
+                    <?php echo $infosPerso['Nm_Last']; ?>
+                    <?php echo $infosPerso['Txt_Email']; ?>
+                </p>
+            <?php endif; ?>
         </div>
     </div>
 </div>

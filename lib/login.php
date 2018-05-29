@@ -14,6 +14,7 @@ if (!isset($_SESSION['logged'])) {
     $_SESSION['email'] = '';
     $_SESSION['emailLog'] = '';
     $_SESSION['errorLog'] = '';
+    $_SESSION['id'] = -1;
 }
 
 
@@ -23,7 +24,6 @@ $pwd = "";
 
 
 if (filter_has_var(INPUT_POST, 'login')) {
-    echo "dab";
 
     //Connexion à la bd
     $db = dbConnect();
@@ -42,9 +42,9 @@ if (filter_has_var(INPUT_POST, 'login')) {
 
         $_SESSION['emailLog'] = $email;
 
-        echo "lol";
         if (pwdVerify($email, $pwd)) {
 
+            $_SESSION['id'] = getId($email);
             $_SESSION['logged'] = TRUE;
 
             header("Location:../php/index.php");
@@ -75,6 +75,18 @@ function emailVerify($emailVerify)
 
 }
 
+function getId($emailVerify)
+{
+    $db = dbConnect();
+
+    $id = $db->prepare("SELECT tbl_user.Id_User FROM tbl_user JOIN tbl_email ON tbl_email.Id_User = tbl_user.Id_User WHERE Txt_Email=:email");
+    $id->execute(array(":email" => $emailVerify));
+
+    $id = $id->fetch();
+
+    return $id['Id_User'];
+}
+
 function pwdVerify($emailVerify, $pwdVerify)
 {
     $db = dbConnect();
@@ -96,9 +108,4 @@ WHERE e.Txt_Email=? ');
     }
 
     return $password_ok;
-}
-
-function insertUser()
-{
-
 }
