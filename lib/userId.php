@@ -9,5 +9,5 @@ function getUserId(){
 	$db = dbConnect();
 
 	$req = $db->prepare("select Id_User from tbl_user where Id_User ='".$_SESSION['id']."'");
-	$req->execute();
+	$req->execute(array());
 }
