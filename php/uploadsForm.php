@@ -21,16 +21,17 @@ if (session_status() == PHP_SESSION_NONE) {
     <title>Formulaire de mise en ligne</title>
 </head>
 <?php if(isLogged()){?>
-<body>
-<?php include 'nav.php'; ?>
+<body class="parallax">
+<?php require_once "nav.php" ?>
+<?php require_once "aside.php" ?>
 
-<div class="container text-left">
+<div class="container text-left pt-5">
     <h1 class="display-4 w-100 text-center mt-3 pb-3 border-bottom border-dark">
         Mise en ligne de projet
     </h1>
 
     <p class="blockquote bg-light border-warning p-3 mt-3" style="border-left: solid 3px">
-        Pour avoir une image de référence, celle-ci doit être nommée <mark>"imgRep.jpg"</mark> et ce trouvée dans un
+        Pour avoir une image de référence, celle-ci doit être nommée <mark>"imgRep.jpg"</mark> et se trouvée dans un
         dossier nommé <mark>"projetInfo"</mark> situé à la racine de votre projet.
         <br>
         <br>

@@ -17,9 +17,6 @@
                                     Petit-Lancy<br>
                                     1213<br>
                                 </li>
-                                <li>
-                                    Phone: 0
-                                </li>
                             </ul>
                         </address>
                     </div>
@@ -41,7 +38,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <!--Footer Bottom-->
-                    <p class="text-xs-center">&copy; Copyright 2018 - Classe I.DA/FA-P2B. Tout droits réservés.</p>
+                    <p class="text-xs-center">&copy; Copyright 2018 - Classe I.DA/FA-P2B. Tous droits réservés.</p>
                 </div>
             </div>
         </div>

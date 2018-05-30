@@ -28,7 +28,9 @@ require_once '../lib/projects.php';
 
 <div id="main" class="mt-5 container">
 
-    <h1 id="title" class="display-4 mb-5 pt-4">Bienvenue sur le site de la Classe I.DA/FA-P2B</h1>
+    <h1 id="title" class="display-4 w-100 text-center mt-3 pb-3 mb-5 pt-4 border-bottom border-dark">
+        Bienvenue sur le site de la Classe I.DA/FA-P2B
+    </h1>
 
     <div class="card text-center mb-5">
         <div class="card-header">
@@ -38,7 +40,7 @@ require_once '../lib/projects.php';
             <h5 class="card-title">Qui sommes-nous?</h5>
             <p class="card-text">
                 Nous sommes une classe de 2ème année de l'école d'informatique du CFPT. Chacun d'entre nous crée des
-                projets que vous pourrez retrouvez ici. Notre domaine de prédiliction est le software, et le
+                projets que vous pourrez retrouver ici. Notre domaine de prédiliction est le software, et le
                 développement d'applications.
             </p>
 
@@ -48,7 +50,7 @@ require_once '../lib/projects.php';
                     <img src="../images/cSharp.bmp" alt="" class="card-img-top rounded-circle mt-3 img-thumbnail">
                     <h2 class="card-title mt-3">C#</h2>
                     <p class="card-text mb-3">
-                        Developpement d'application
+                        Développement d'application
                     </p>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-3 pl-5 pr-5">
@@ -69,7 +71,7 @@ require_once '../lib/projects.php';
                     <img src="../images/php.jpg" alt="" class="card-img-top rounded-circle mt-3 img-thumbnail">
                     <h2 class="card-title mt-3">PHP</h2>
                     <p class="card-text mb-3">
-                        Interaction serveur
+                        Intéraction serveur
                     </p>
                 </div>
             </div>

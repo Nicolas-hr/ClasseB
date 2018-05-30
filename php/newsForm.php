@@ -19,63 +19,68 @@ require_once '../lib/security.php';
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <?php if (isLogged()){ ?>
-<body>
+<body class="parallax">
 <!-- Navabar -->
 <?php require_once "nav.php" ?>
 <?php require_once "aside.php" ?>
-<div class="container">
 
-    <form action="../lib/news.php" method="post">
-        <table>
-            <tr>
-                <td>
+<div class="container mt-5">
+
+    <h1 class="display-4 w-100 text-center mt-3 pb-3 border-bottom border-dark">
+        Ajout d'actualité
+    </h1>
+
+    <div class="card mb-4 mt-3">
+        <div class="card-header">
+            <h4 class="text-center">Ajout d'actualité</h4>
+        </div>
+        <div class="card-body">
+
+            <form action="../lib/news.php" method="post">
+                <div class="form-group">
                     <label for="titre">Titre: </label>
-                </td>
-                <td>
-                    <input type="text" name="titre" id="titre">
-                </td>
-            </tr>
-            <tr>
-                <td>
+                    <input type="text" class="form-control" name="titre" id="titre">
+                </div>
+
+                <div class="form-group">
                     <label for="description">Description: </label>
-                </td>
-                <td>
-                    <input type="text" name="description" id="description">
-                </td>
-            </tr>
-        </table>
-        <input type="submit" name="addAnnonce" value="Ajouter une annonce">
-    </form>
-    <div class="error">
-        <?php
-        if (filter_input(INPUT_GET, 'errorNews')) {
-            switch (filter_input(INPUT_GET, 'errorNews')) {
-                case 2:
-                    echo '<div class="p-3 mb-2 bg-danger text-white">';
-                    echo '<p class="mb-0">Veuillez choisir un titre à votre annonce.</p>';
-                    break;
+                    <input type="text" class="form-control" name="description" id="description">
+                </div>
 
-                case 3:
-                    echo '<div class="p-3 mb-2 bg-danger text-white">';
-                    echo '<p class="mb-0">Veuillez mettre une description à votre annonce.</p>';
-                    break;
+                <input type="submit" class="btn btn-primary" name="addAnnonce" value="Ajouter une annonce">
+            </form>
+            <div class="error">
+                <?php
+                if (filter_input(INPUT_GET, 'errorNews')) {
+                    switch (filter_input(INPUT_GET, 'errorNews')) {
+                        case 2:
+                            echo '<div class="p-3 mb-2 bg-danger text-white">';
+                            echo '<p class="mb-0">Veuillez choisir un titre à votre annonce.</p>';
+                            break;
 
-                case 4:
-                    echo '<div class="p-3 mb-2 bg-danger text-white">';
-                    echo '<p class="mb-0">Votre titre doit faire 2 carctères au minimum.</p>';
-                    break;
+                        case 3:
+                            echo '<div class="p-3 mb-2 bg-danger text-white">';
+                            echo '<p class="mb-0">Veuillez mettre une description à votre annonce.</p>';
+                            break;
 
-                case 5:
-                    echo '<div class="p-3 mb-2 bg-danger text-white">';
-                    echo '<p class="mb-0">Votre description doit faire 5 carctères au minimum.</p>';
-                    break;
-            }
-        }
-        } else {
-            header('Location: loginForm.php');
-            exit;
-        }
-        ?>
+                        case 4:
+                            echo '<div class="p-3 mb-2 bg-danger text-white">';
+                            echo '<p class="mb-0">Votre titre doit faire 2 carctères au minimum.</p>';
+                            break;
+
+                        case 5:
+                            echo '<div class="p-3 mb-2 bg-danger text-white">';
+                            echo '<p class="mb-0">Votre description doit faire 5 carctères au minimum.</p>';
+                            break;
+                    }
+                }
+                } else {
+                    header('Location: loginForm.php');
+                    exit;
+                }
+                ?>
+            </div>
+        </div>
     </div>
 </div>
 <!-- Footer -->
