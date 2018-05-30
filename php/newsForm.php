@@ -18,6 +18,7 @@ require_once '../lib/security.php';
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
+<?php if(isLogged()){ ?>
 <body>
   <!-- Navabar -->
   <?php include 'nav.php'; ?>
@@ -68,6 +69,10 @@ require_once '../lib/security.php';
             break;
 		}
 	}
+} else{
+	header('Location: loginForm.php');
+	exit;
+}
   ?>
   </div>
   <!-- Footer -->

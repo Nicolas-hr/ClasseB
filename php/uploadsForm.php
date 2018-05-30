@@ -1,5 +1,11 @@
 <?php
 require_once '../lib/projects.php';
+require_once '../lib/security.php';
+
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,6 +20,7 @@ require_once '../lib/projects.php';
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Formulaire de mise en ligne</title>
 </head>
+<?php if(isLogged()){?>
 <body>
 <?php include 'nav.php'; ?>
 
@@ -88,7 +95,12 @@ require_once '../lib/projects.php';
     </div>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include 'footer.php'; 
+} else {
+	header('Location: loginForm.php');
+	exit;
+}
+?>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
