@@ -8,6 +8,9 @@ if (session_status() == PHP_SESSION_NONE) {
 function getUserId(){
 	$db = dbConnect();
 
-	$req = $db->prepare("select Id_User from tbl_user where Id_User ='".$_SESSION['id']."'");
-	$req->execute(array());
+	$req = $db->prepare("SELECT Id_User FROM tbl_user WHERE Id_User = ? ");
+	$req->execute(array($_SESSION['id']));
+	$req = $req->fetch();
+	
+	return $req['Id_User'];
 }
