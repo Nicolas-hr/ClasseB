@@ -13,13 +13,16 @@
     <!-- Custom styles for this template -->
     <link href="../css/register.css" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+
     <title>Register</title>
 </head>
-<body>
+<body class="parallax">
 
-<?php require_once 'nav.php'; ?>
+<?php require_once "nav.php" ?>
+<?php require_once "aside.php" ?>
 
-<main class="container">
+<main class="container mt-5">
     <form class="form-signin" action="../lib/register.php" method="post">
         <div id="headerForm" class="text-center">
             <img class="mb-4 rounded" src="../images/php.jpg" alt="" width="72" height="72">

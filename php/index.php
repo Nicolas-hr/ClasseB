@@ -1,10 +1,10 @@
 <?php
 /*****************************************************************************
-* Auteur: Cavagna Tanguy, Günner Adar, Oliveira Francisco, Hoarau Nicolas    *                                                 *
-* Description : Ce site est un site oú l'on peut upload nos projet WEB, voir *
-*               les news du site.                                            *
-* Date de création : 08.05.2018                                              *
-******************************************************************************/
+ * Auteur: Cavagna Tanguy, Günner Adar, Oliveira Francisco, Hoarau Nicolas    *                                                 *
+ * Description : Ce site est un site oú l'on peut upload nos projet WEB, voir *
+ *               les news du site.                                            *
+ * Date de création : 08.05.2018                                              *
+ ******************************************************************************/
 
 require_once '../lib/projects.php';
 ?>
@@ -22,12 +22,13 @@ require_once '../lib/projects.php';
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Classe 2B</title>
 </head>
-<body>
+<body class="parallax">
 <?php require_once "nav.php" ?>
+<?php require_once "aside.php" ?>
 
-<div id="main" class="mt-3 container">
+<div id="main" class="mt-5 container">
 
-    <h1 id="title" class="display-4 mb-5">Bienvenue sur le site de la Classe I.DA/FA-P2B</h1>
+    <h1 id="title" class="display-4 mb-5 pt-4">Bienvenue sur le site de la Classe I.DA/FA-P2B</h1>
 
     <div class="card text-center mb-5">
         <div class="card-header">
