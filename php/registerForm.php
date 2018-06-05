@@ -6,6 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <link rel="icon" href="../images/logo.png" type="image/x-icon"/>
+
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -30,7 +32,8 @@
             <h1 class="h3 font-weight-normal">Inscription</h1>
         </div>
 
-        <input type="text" id="first" name="firstNameR" class="form-control first" placeholder="Prénom" required autofocus>
+        <input type="text" id="first" name="firstNameR" class="form-control first" placeholder="Prénom" required
+               autofocus>
 
         <input type="text" id="last" name="lastNameR" class="form-control" placeholder="Nom" required>
 
@@ -40,7 +43,8 @@
 
         <input type="password" id="pwd" name="pwdR" class="form-control" placeholder="Mot de passe" required>
 
-        <input type="password" id="pwdConfirme" name="confirmPwdR" class="form-control last" placeholder="Confirmer votre mot de passe" required>
+        <input type="password" id="pwdConfirme" name="confirmPwdR" class="form-control last"
+               placeholder="Confirmer votre mot de passe" required>
 
         <div class="checkbox mb-3 mt-3 text-center">
             <label>
@@ -57,14 +61,17 @@
                 foreach ($_SESSION['errorReg'] as $value) {
                     if ($value != "") {
                         echo "<div class='mt-2 alert alert-danger' role='alert' >" . $value . "</div>";
+                        echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+    <span aria-hidden=\"true\">&times;</span>
+  </button>";
                     }
                 }
             }
         }
         $_SESSION['errorReg'] = [
-            'firstName' =>'',
-            'lastName' =>'',
-            'username'=>'',
+            'firstName' => '',
+            'lastName' => '',
+            'username' => '',
             'email' => '',
             'password' => '',
         ];

@@ -37,6 +37,7 @@
         <input class="btn btn-lg btn-primary btn-block" type="submit" value="Connexion" name="login">
         <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
     </form>
+
 </main>
 
 <!-- JQUERY - JS -->

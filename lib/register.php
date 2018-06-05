@@ -75,7 +75,7 @@ if (filter_has_var(INPUT_POST, 'register')) {
         $error = true;
     }
     if (empty($pwd) OR empty($confirmPwd) OR $pwd != $confirmPwd) {
-        $_SESSION['errorReg']['password'] = "The passwords don't match";
+        $_SESSION['errorReg']['password'] = "Les mots de passe ne se correspondent pas";
         $error = true;
     }
 
@@ -84,6 +84,9 @@ if (filter_has_var(INPUT_POST, 'register')) {
             addUser($firstName, $lastName, $username, $email, $pwd);
             header("Location: ../php/loginForm.php");
             exit;
+        }
+        else{
+            $_SESSION['errorReg']['email'] = "Cet email est déjà enregistré";
         }
     }
 
