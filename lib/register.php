@@ -80,7 +80,11 @@ if (filter_has_var(INPUT_POST, 'register')) {
     }
 
     if (!$error) {
+        $_SESSION['firstNameReg'] = $firstName;
+        $_SESSION['lastNameReg'] = $lastName;
+        $_SESSION['username'] = $username;
         if (emailVerify($email)) {
+            $_SESSION['emailReg'] = $email;
             addUser($firstName, $lastName, $username, $email, $pwd);
             header("Location: ../php/loginForm.php");
             exit;

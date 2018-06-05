@@ -40,7 +40,7 @@
 
         <?php
         if (isset($_SESSION['errorLog']) AND $_SESSION['errorLog'] != '') {
-            echo "<div class='mt-2 alert alert-danger' role='alert' >" . $_SESSION['errorLog'] . "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+            echo "<div class='mt-2 alert alert-primary' role='alert' >" . $_SESSION['errorLog'] . "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
     <span aria-hidden=\"true\">&times;</span>
   </button></div>";
         }

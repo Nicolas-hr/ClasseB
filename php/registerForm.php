@@ -33,13 +33,25 @@
         </div>
 
         <input type="text" id="first" name="firstNameR" class="form-control first" placeholder="Prénom" required
-               autofocus>
+               autofocus value="<?php if (isset($_SESSION['firstNameReg']) AND $_SESSION['firstNameReg'] != '') {
+            echo $_SESSION['firstNameReg'];
+        } ?>">
 
-        <input type="text" id="last" name="lastNameR" class="form-control" placeholder="Nom" required>
 
-        <input type="text" id="username" name="usernameR" class="form-control" placeholder="Pseudo" required>
+        <input type="text" id="last" name="lastNameR" class="form-control" placeholder="Nom" required
+               value="<?php if (isset($_SESSION['lastNameReg']) AND $_SESSION['lastNameReg'] != '') {
+                   echo $_SESSION['lastNameReg'];
+               } ?>">
 
-        <input type="email" id="email" name="emailR" class="form-control" placeholder="Adresse email" required>
+        <input type="text" id="username" name="usernameR" class="form-control" placeholder="Pseudo" required
+               value="<?php if (isset($_SESSION['username']) AND $_SESSION['username'] != '') {
+                   echo $_SESSION['username'];
+               } ?>">
+
+        <input type="email" id="email" name="emailR" class="form-control" placeholder="Adresse email" required
+               value="<?php if (isset($_SESSION['emailReg']) AND $_SESSION['emailReg'] != '') {
+                   echo $_SESSION['emailReg'];
+               } ?>">
 
         <input type="password" id="pwd" name="pwdR" class="form-control" placeholder="Mot de passe" required>
 
@@ -54,7 +66,7 @@
             if (isset($_SESSION['errorReg'])) {
                 foreach ($_SESSION['errorReg'] as $value) {
                     if ($value != "") {
-                        echo "<div class='mt-2 alert alert-danger' role='alert' >" . $value . "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                        echo "<div class='mt-2 alert alert-primary' role='alert' >" . $value . "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
     <span aria-hidden=\"true\">&times;</span>
   </button></div>";
 
