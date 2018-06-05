@@ -25,7 +25,7 @@
 <main class="container mt-5">
     <form class="form-signin" action="../lib/register.php" method="post">
         <div id="headerForm" class="text-center">
-            <img class="mb-4 rounded" src="../images/php.jpg" alt="" width="72" height="72">
+            <img class="mb-4 rounded" src="../images/logo.png" alt="" width="72" height="72">
 
             <h1 class="h3 font-weight-normal">Inscription</h1>
         </div>
