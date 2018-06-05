@@ -30,7 +30,7 @@
             <h1 class="h3 font-weight-normal">Connexion</h1>
         </div>
 
-        <input type="email" id="email" name="emailL" class="form-control first" placeholder="Adresse email" required value="<?php if (isset($_SESSION['errorLog'])) { echo $_SESSION['errorLog']['email']; } ?>">
+        <input type="email" id="email" name="emailL" class="form-control first" placeholder="Adresse email" required value="<?php if (isset($_SESSION['emailLog']) && $_SESSION['emailLog'] != '') { echo $_SESSION['emailLog']; } ?>">
 
         <input type="password" id="pwd" name="pwdL" class="form-control last" placeholder="Mot de passe" required>
 
@@ -38,7 +38,7 @@
 
         <?php
         if (isset($_SESSION['errorLog']) AND $_SESSION['errorLog'] != '') {
-            echo "<div class='mt-2 alert alert-danger' role='alert' >" . $_SESSION['errorLog']['message'] . "</div>";
+            echo "<div class='mt-2 alert alert-danger' role='alert' >" . $_SESSION['errorLog'] . "</div>";
         }
 
         $_SESSION['errorLog'] = '';
