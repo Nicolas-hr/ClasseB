@@ -32,7 +32,6 @@ if (filter_has_var(INPUT_POST, 'login')) {
     $_SESSION['emailLog'] = '';
     $_SESSION['errorLog'] = '';
 
-
     //Entrees par l'utilisateur
     $email = filter_input(INPUT_POST, 'emailL', FILTER_SANITIZE_EMAIL);
     $pwd = filter_input(INPUT_POST, 'pwdL', FILTER_SANITIZE_STRING);
@@ -52,15 +51,21 @@ if (filter_has_var(INPUT_POST, 'login')) {
 
         } else {
 
-            $_SESSION['errorLog'] = "Le mot de passe n'est pas valable";
+            $_SESSION['errorLog'] = array(
+                'message' => "Le mot de passe n'est pas valable",
+                'email' => $email,
+            );
         }
 
     } else {
-        $_SESSION['errorLog'] = "L'email n'existe pas";
+        $_SESSION['errorLog'] = array(
+            'message' => "L'email n'existe pas",
+            'email' => $email,
+        );
     }
 }
-//header("Location:../php/loginForm.php");
-//exit;
+header("Location:../php/loginForm.php");
+exit;
 
 //FONCTIONS-------------------------------------------------------------------------------------------------------------
 function emailVerify($emailVerify)

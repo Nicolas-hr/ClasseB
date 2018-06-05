@@ -30,11 +30,20 @@
             <h1 class="h3 font-weight-normal">Connexion</h1>
         </div>
 
-        <input type="email" id="email" name="emailL" class="form-control first" placeholder="Adresse email" required>
+        <input type="email" id="email" name="emailL" class="form-control first" placeholder="Adresse email" required value="<?php if (isset($_SESSION['errorLog'])) { echo $_SESSION['errorLog']['email']; } ?>">
 
         <input type="password" id="pwd" name="pwdL" class="form-control last" placeholder="Mot de passe" required>
 
         <input class="btn btn-lg btn-primary btn-block" type="submit" value="Connexion" name="login">
+
+        <?php
+        if (isset($_SESSION['errorLog']) AND $_SESSION['errorLog'] != '') {
+            echo "<div class='mt-2 alert alert-danger' role='alert' >" . $_SESSION['errorLog']['message'] . "</div>";
+        }
+
+        $_SESSION['errorLog'] = '';
+        ?>
+
         <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
     </form>
 </main>
