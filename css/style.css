@@ -17,26 +17,10 @@
 
 footer{
     color: white;
-}
-footer a{
-    color: #bfffff;
-}
-footer a:hover{
-    color: white;
+    opacity: 0.8;
+    background-color: #3d6277;
 }
 
-.footer-bottom{
-    background: #3d6277;
-    padding: 2em;
-}
-.footer-top{
-    background: #2d4958;
-}
-.footer-middle{
-    background: #3d6277;
-    padding-top: 2em;
-    color: white;
-}
 /**Sub Navigation**/
 .subnavigation-container{
     background: #3d6277;

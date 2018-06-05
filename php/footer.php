@@ -1,46 +1,20 @@
-<footer class="mainfooter" role="contentinfo">
-    <div class="footer-top p-y-2">
-        <!--  Contact  -->
-    </div>
-    <div class="footer-middle">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <!--Column1-->
-                    <div class="footer-pad">
-                        <h4>Adresse</h4>
-                        <address>
-                            <ul class="list-unstyled">
-                                <li>
-                                    Rue Gérard-de-Ternier<br>
-                                    12<br>
-                                    Petit-Lancy<br>
-                                    1213<br>
-                                </li>
-                            </ul>
-                        </address>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <!--Column1-->
+<footer class="footer p-2">
 
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <!--Column2-->
+    <div class="container">
 
-                </div>
-                
-            </div>
-        </div>
+        <h4>Adresse</h4>
+        <address>
+            <ul class="list-unstyled">
+                <li>
+                    Rue Gérard-de-Ternier 12<br>
+                    1213 Genève<br>
+                </li>
+            </ul>
+        </address>
+
+        <p class="text-xs-center">&copy; Copyright 2018 - Classe I.DA/FA-P2B. Tous droits réservés.</p>
+
+
     </div>
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <!--Footer Bottom-->
-                    <p class="text-xs-center">&copy; Copyright 2018 - Classe I.DA/FA-P2B. Tous droits réservés.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </footer>
