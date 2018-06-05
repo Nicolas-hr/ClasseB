@@ -46,13 +46,7 @@
         <input type="password" id="pwdConfirme" name="confirmPwdR" class="form-control last"
                placeholder="Confirmer votre mot de passe" required>
 
-        <div class="checkbox mb-3 mt-3 text-center">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-
-        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Inscription" name="register">
+        <input class="btn btn-lg btn-primary btn-block rounded" type="submit" value="Inscription" name="register">
 
         <?php {
 
@@ -60,10 +54,10 @@
             if (isset($_SESSION['errorReg'])) {
                 foreach ($_SESSION['errorReg'] as $value) {
                     if ($value != "") {
-                        echo "<div class='mt-2 alert alert-danger' role='alert' >" . $value . "</div>";
-                        echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                        echo "<div class='mt-2 alert alert-danger' role='alert' >" . $value . "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
     <span aria-hidden=\"true\">&times;</span>
-  </button>";
+  </button></div>";
+
                     }
                 }
             }

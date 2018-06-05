@@ -6,6 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <link rel="icon" href="../images/logo.png" type="image/x-icon"/>
+
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -34,11 +36,13 @@
 
         <input type="password" id="pwd" name="pwdL" class="form-control last" placeholder="Mot de passe" required>
 
-        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Connexion" name="login">
+        <input class="btn btn-lg btn-primary btn-block rounded" type="submit" value="Connexion" name="login">
 
         <?php
         if (isset($_SESSION['errorLog']) AND $_SESSION['errorLog'] != '') {
-            echo "<div class='mt-2 alert alert-danger' role='alert' >" . $_SESSION['errorLog'] . "</div>";
+            echo "<div class='mt-2 alert alert-danger' role='alert' >" . $_SESSION['errorLog'] . "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+    <span aria-hidden=\"true\">&times;</span>
+  </button></div>";
         }
 
         $_SESSION['errorLog'] = '';
