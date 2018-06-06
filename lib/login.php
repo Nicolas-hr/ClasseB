@@ -13,7 +13,10 @@ if (!isset($_SESSION['logged'])) {
     $_SESSION['logged'] = FALSE;
     $_SESSION['email'] = '';
     $_SESSION['emailLog'] = '';
-    $_SESSION['errorLog'] = '';
+    $_SESSION['errorLog'] = array(
+        "email" => '',
+        "pwd" => ''
+    );
     $_SESSION['id'] = -1;
 }
 
@@ -30,12 +33,22 @@ if (filter_has_var(INPUT_POST, 'login')) {
 
     //Vider le variables de session
     $_SESSION['emailLog'] = '';
-    $_SESSION['errorLog'] = '';
+    $_SESSION['errorLog'] = array(
+        "email" => '',
+        "pwd" => ''
+    );
 
     //Entrees par l'utilisateur
     $email = filter_input(INPUT_POST, 'emailL', FILTER_SANITIZE_EMAIL);
     $pwd = filter_input(INPUT_POST, 'pwdL', FILTER_SANITIZE_STRING);
 
+    if (empty($email)) {
+        $_SESSION['errorLog']['email'] = "L'email n'est pas valable";
+    }
+
+    if (empty($pwd)) {
+        $_SESSION['errorLog']['pwd'] = "Le mot de passe est vide";
+    }
 
     if (emailVerify($email)) {
 
@@ -50,18 +63,13 @@ if (filter_has_var(INPUT_POST, 'login')) {
             exit;
 
         } else {
-
-            $_SESSION['errorLog'] = array(
-                'message' => "Le mot de passe n'est pas valable",
-                'email' => $email,
-            );
+            $_SESSION['errorLog']['pwd'] = "Le mot de passe n'est pas valable";
         }
 
     } else {
-        $_SESSION['errorLog'] = array(
-            'message' => "L'email n'existe pas",
-            'email' => $email,
-        );
+        $_SESSION['errorLog']['email'] = "L'email n'existe pas";
+
+
     }
 }
 header("Location:../php/loginForm.php");

@@ -60,20 +60,20 @@
 
         <input class="btn btn-lg btn-primary btn-block rounded" type="submit" value="Inscription" name="register">
 
-        <?php {
+        <?php
 
 
-            if (isset($_SESSION['errorReg'])) {
-                foreach ($_SESSION['errorReg'] as $value) {
-                    if ($value != "") {
-                        echo "<div class='mt-2 alert alert-primary' role='alert' >" . $value . "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+        if (isset($_SESSION['errorReg'])) {
+            foreach ($_SESSION['errorReg'] as $value) {
+                if ($value != "") {
+                    echo "<div class='mt-2 alert alert-danger' role='alert' >" . $value . "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
     <span aria-hidden=\"true\">&times;</span>
   </button></div>";
 
-                    }
                 }
             }
         }
+
         $_SESSION['errorReg'] = [
             'firstName' => '',
             'lastName' => '',
@@ -85,7 +85,22 @@
         <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
     </form>
 </main>
+<script>
 
+    var password = document.getElementById("pwd");
+    var confirm_password = document.getElementById("pwdConfirme");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Les mots de passe ne se correspondent pas");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
 <!-- JQUERY - JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

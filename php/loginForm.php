@@ -39,13 +39,21 @@
         <input class="btn btn-lg btn-primary btn-block rounded" type="submit" value="Connexion" name="login">
 
         <?php
-        if (isset($_SESSION['errorLog']) AND $_SESSION['errorLog'] != '') {
-            echo "<div class='mt-2 alert alert-primary' role='alert' >" . $_SESSION['errorLog'] . "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+        if (isset($_SESSION['errorLog'])) {
+            foreach ($_SESSION['errorLog'] as $value) {
+                if ($value != "") {
+                    echo "<div class='mt-2 alert alert-danger' role='alert' >" . $value . "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
     <span aria-hidden=\"true\">&times;</span>
   </button></div>";
+
+                }
+            }
         }
 
-        $_SESSION['errorLog'] = '';
+        $_SESSION['errorLog'] = array(
+            "email" => '',
+            "pwd" => ''
+        );
         ?>
 
         <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>

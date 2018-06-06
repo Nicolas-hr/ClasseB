@@ -63,7 +63,7 @@ if (filter_has_var(INPUT_POST, 'register')) {
         $error = true;
     }
     if (empty($lastName)) {
-        $_SESSION['errorReg']['lastName'] = "Veuillez entrer votre prénom";
+        $_SESSION['errorReg']['lastName'] = "Veuillez entrer votre nom";
         $error = true;
     }
     if (empty($email)) {
